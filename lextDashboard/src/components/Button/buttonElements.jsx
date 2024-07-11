@@ -9,13 +9,13 @@ const buttonStyles = css`
   border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-
+  width: 100%;
   &:disabled {
     background-color: #ddd;
     color: #aaa;
     border-color: #ddd;
-    // cursor: not-allowed;
   }
+  margin-bottom: 8px;
 `;
 
 const containedStyles = css`
@@ -44,16 +44,22 @@ const outlineStyles = css`
   }
 
   &:disabled:hover {
-    // background-color: transparent;
     background-color: #ddd;
     color: #aaa;
     border-color: #ddd;
   }
 `;
 
+const activeStyles = css`
+  background-color: #5d87ff;
+  color: white;
+  border: 1px solid #5d87ff;
+`;
+
 export const StyledButton = styled.button`
   ${buttonStyles}
   ${({ variant }) => (variant === 'contained' ? containedStyles : outlineStyles)}
+  ${({ isActive }) => isActive && activeStyles}
 `;
 
 export const IconWrapper = styled.span`

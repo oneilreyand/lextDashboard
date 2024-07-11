@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '../pages/errorBoundry';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import SideBar from '../components/Sidebar';
 import {
   LayoutContainer,
@@ -14,8 +14,7 @@ import {
 import { menuSvg } from '../assets';
 
 const Layout = () => {
-  const ss = useSelector(state => state.global);
-  console.log(ss, 'screen size');
+  // const ss = useSelector(state => state.global);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleSidebar = () => {

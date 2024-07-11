@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
-// import Spiner from '../../components/Spiner';
 import { ModalActions, StatusIndicator, SuccessContainer } from './signaturePadElements';
 
 const SignaturePad = ({ onCancel, onSubmit }) => {
@@ -49,7 +48,6 @@ const SignaturePad = ({ onCancel, onSubmit }) => {
       setIsLoading(true)
       canvasRef.current.toBlob((blob) => {
         if (blob) {
-          console.log('Blob created:', blob);
           // Simulate sending blob to server (mocking success/failure)
           setTimeout(() => {
             setIsSuccess(true); // Set isSuccess state after 10 seconds
@@ -68,8 +66,8 @@ const SignaturePad = ({ onCancel, onSubmit }) => {
       :
       <canvas
         ref={canvasRef}
-        width={300}
-        height={400}
+        width={360}
+        height={300}
         style={{ border: '1px solid #ccc', cursor: 'crosshair' }}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

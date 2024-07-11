@@ -64,14 +64,6 @@ export const ModalOverlay = styled.div`
     `}
 `;
 
-export const CloseIcon = styled.span`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  color: #888;
-`;
-
 export const ModalTitle = styled.h2`
   font-size: 1.5rem;
   margin-top: 0;
@@ -90,4 +82,17 @@ export const ModalActions = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
+
+export const CloseButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const CloseIcon = styled.img`
+  top: 10px;
+  right: 10px;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
 `;

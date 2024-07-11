@@ -1,40 +1,25 @@
-import { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useIdle from '../../utils/useIdle';
-import Modal from '../../components/ModalIdle';
-
-// Contoh fungsi untuk memeriksa status autentikasi
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadToken } from '../../store/action/authAction';
 const isAuthenticated = () => {
-  // Logika Anda untuk memeriksa apakah pengguna sudah terautentikasi
-  // Misalnya, memeriksa token di localStorage atau konteks autentikasi
-  return true; // Gantilah dengan logika autentikasi Anda
+  return !!localStorage.getItem('token'); // Check for a token in local storage
 };
 
 const PrivateRoute = ({ children }) => {
-  const isIdle = useIdle(60000); // 1 menit
-  const [isModalOpen, setModalOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const location = useLocation()
   useEffect(() => {
-    if (isIdle) {
-      setModalOpen(true);
-    }
-  }, [isIdle]);
+    dispatch(loadToken())
+  }, [dispatch, location]);
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
   return isAuthenticated() ? (
     <>
       {children}
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} timeout={30}>
-          <h2>Idle Warning</h2>
-          <p>You have been idle.</p>
-          <button onClick={handleCloseModal}>Close</button>
-        </Modal>
-      )}
     </>
   ) : (
     <Navigate to="/login" replace />

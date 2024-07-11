@@ -17,7 +17,6 @@ const useIdle = (timeout) => {
     events.forEach(event => window.addEventListener(event, resetTimer));
 
     resetTimer();
-    console.log(timer, 'timer');
     return () => events.forEach(event => window.removeEventListener(event, resetTimer));
   }, [timeout]);
 

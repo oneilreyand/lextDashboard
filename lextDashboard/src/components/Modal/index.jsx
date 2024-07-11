@@ -6,9 +6,11 @@ import {
   ModalTitle,
   ModalSubtitle,
   ModalActions,
+  CloseButton,
+  CloseIcon,
 } from './modalElements';
 import Button from '../Button';
-
+import {closeSvg} from '../../assets'
 const Modal = (
   { 
     isOpen, onClose, children,
@@ -27,6 +29,9 @@ const Modal = (
   return isOpen ? (
     <ModalContentContainer>
       <ModalContent size={size}>
+        <CloseButton onClick={onClose}>
+          <CloseIcon src={closeSvg} alt={`close`} />
+        </CloseButton>
         <ModalTitle>{title}</ModalTitle>
         <ModalSubtitle>{subtitle}</ModalSubtitle>
         {children}

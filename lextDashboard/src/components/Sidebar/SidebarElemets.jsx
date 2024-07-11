@@ -19,7 +19,11 @@ export const SidebarContainer = styled.div`
 
 export const LogoWraaping = styled.div`
   height: 64px;
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+`;
 
 export const AccountWrapper = styled.div`
   width: 100%;
@@ -30,6 +34,7 @@ export const AccountWrapper = styled.div`
   justify-content: center;
   flex-shrink: 0;
   padding: 16px;
+  border-radius: 20px;
 `;
 
 export const AvatarWrapper = styled.div`
@@ -53,8 +58,8 @@ export const InfoAvatarWrapper = styled.div`
 `;
 
 export const Name = styled.span`
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 0.7rem;
+  font-weight: 500;
 `;
 
 export const Role = styled.span`
@@ -76,6 +81,7 @@ export const RadioBtn = styled.span`
 
 export const MenuWrapper = styled.div`
   flex: 1;
+  margin-top: 10px;
   overflow-y: auto;
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
@@ -85,3 +91,54 @@ export const MenuWrapper = styled.div`
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 `;
+
+export const LogoSvg = styled.img`
+  height: 50px;
+  width: 50px;
+  padding: 3px;
+`;
+
+export const LogoSvgText = styled.img`
+  height: 22px;
+  padding: 3px;
+  margin-left: 10px;
+`;
+
+export const ProfileMenuWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: #5d87ff;
+  cursor: pointer;
+`;
+
+export const ProfileMenuIcon = styled.img`
+  height: 20px;
+  width: 20px;
+`;
+
+export const ProfileMenuContainer = styled.div`
+  position: absolute;
+  top: 85%;
+  left: 280px;
+  transform: translateY(-50%);
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ProfileMenuItem = styled.div`
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-bottom: solid 0.5px gray; 
+  font-weight: 300;
+  font-size: 0.9rem;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+

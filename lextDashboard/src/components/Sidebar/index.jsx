@@ -1,23 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   SidebarContainer,
   LogoWraaping,
   AccountWrapper,
   MenuWrapper,
-  Avatar,
   InfoAvatarWrapper,
   Name,
   Role,
+  LogoSvg,
+  LogoSvgText,
+  ProfileMenuWrapper,
+  ProfileMenuIcon,
+  ProfileMenuContainer,
+  ProfileMenuItem,
 } from './SidebarElemets';
-import MenuItem from '../MenuItem/index';
+import LazyAvatar from '../LazyAvatar';
+import MenuItem from '../SidebarMenu';
 import { menu } from '../../data';
+import {
+  lexLogoSvg,
+  lexLogotextSvg,
+  chevronRightSvg,
+  chevronleftSvg,
+} from '../../assets';
+import { logout } from '../../store/action/authAction'
 
 function Sidebar({ isCollapsed }) {
+  const dispatach = useDispatch();
+  const profileMenuRef = useRef(null);
   const [activeMenu, setActiveMenu] = useState(null);
+  const [activeProfileMenu, setActiveProfileMenu] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const menuItemIndex = menu.findIndex(item => item.path === currentPath);
+    setActiveMenu(menuItemIndex !== -1 ? menuItemIndex : 0);
+  }, [location.pathname]);
 
   const handleMenuClick = (index) => {
     setActiveMenu(index);
@@ -28,9 +52,36 @@ function Sidebar({ isCollapsed }) {
     navigate('/dashboard'); // Redirect to /dashboard on initial load
   }, []);
 
+  const handleProfileMenu = () =>{
+    setActiveProfileMenu(!activeProfileMenu)
+  };
+
+  const handleLogout = () => {
+    dispatach(logout());
+    navigate('/login');
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setActiveProfileMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <SidebarContainer isCollapsed={isCollapsed}>
       <LogoWraaping>
+        <LogoSvg src={lexLogoSvg} alt='logo-svg'/>
+        {!isCollapsed &&
+          <LogoSvgText src={lexLogotextSvg} alt='logo-svg'/>
+        }
       </LogoWraaping>
       {isCollapsed ? '...' : 'Menu'}
       <MenuWrapper>
@@ -47,17 +98,34 @@ function Sidebar({ isCollapsed }) {
         ))}
       </MenuWrapper>
       {!isCollapsed &&
-         <AccountWrapper>
-          <Avatar/>
-          <InfoAvatarWrapper>
-            <Name>
-              Reyand Oneil
-            </Name>
-            <Role>
-              React Developer
-            </Role>
-          </InfoAvatarWrapper>
-        </AccountWrapper>
+        <>
+          <AccountWrapper>
+            <LazyAvatar 
+            src={`https://api.multiavatar.com/Reyand Oneil.svg`}
+            alt={'account-avatar'}
+            />
+            <InfoAvatarWrapper>
+              <Name>
+                Dr. Suci ningsih Spd
+              </Name>
+              <Role>
+                Penyakit Dalam
+              </Role>
+            </InfoAvatarWrapper>
+            <ProfileMenuWrapper>
+              <ProfileMenuIcon 
+                src={activeProfileMenu ? chevronleftSvg : chevronRightSvg}
+                onClick={handleProfileMenu}
+              />
+            </ProfileMenuWrapper>
+            {activeProfileMenu && (
+              <ProfileMenuContainer ref={profileMenuRef}>
+                <ProfileMenuItem onClick={handleLogout}>log out</ProfileMenuItem>
+                <ProfileMenuItem>Edit Profile</ProfileMenuItem>
+              </ProfileMenuContainer>
+            )}
+          </AccountWrapper>
+        </>
       }
     </SidebarContainer>
   );

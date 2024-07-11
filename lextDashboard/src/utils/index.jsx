@@ -3,6 +3,7 @@ import ErrorBoundry from '../pages/errorBoundry';
 import PrivateRoute from './privateRoute';
 import GlobalStyle from './GlobalStyle/GlobalStyle';
 import UseIdle from './useIdle';
+import TruncateText from './TruncateText';
 
 
 export {
@@ -11,4 +12,5 @@ export {
      PrivateRoute,
      GlobalStyle,
      UseIdle,
+     TruncateText,
 }

@@ -1,27 +1,51 @@
-const mongoose = require('mongoose');
+'use strict';
+const { Model } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
-const UserSchema = new mongoose.Schema(
-  {
-    userName: {
-      type: String,
-      required: true,
-      unique: true,
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    static associate(models) {
+      User.belongsTo(models.Clinic, {
+        foreignKey: 'clinicId',
+        targetKey: 'id',
+        onDelete: 'CASCADE',
+      });
+    }
+  }
+  User.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
+    role: DataTypes.STRING,
+    name: DataTypes.STRING,
+    avatar: DataTypes.STRING,
+    clinicId: {
+      type: DataTypes.UUID,
     },
-    password: {
-      type: String,
-      required: true,
+    token: {
+      type: DataTypes.TEXT, // Mengubah tipe kolom token menjadi TEXT
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { timestamps: true }
-);
+  }, {
+    sequelize,
+    modelName: 'User',
+    hooks: {
+      beforeCreate: async (user, options) => {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+      },
+      beforeUpdate: async (user, options) => {
+        if (user.changed('password')) {
+          const salt = await bcrypt.genSalt(10);
+          user.password = await bcrypt.hash(user.password, salt);
+        }
+      }
+    }
+  });
+  return User;
+};
 
-module.exports = mongoose.model('User', UserSchema);

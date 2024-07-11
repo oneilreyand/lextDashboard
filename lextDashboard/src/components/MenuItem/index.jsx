@@ -1,26 +1,21 @@
 import PropTypes from 'prop-types';
-import { MenuItemContainer, MenuIcon, MenuTitle, Links } from './MenuItemElements';
+import styled from 'styled-components';
 
-const MenuItem = ({ icon, title, isActive, onClick, isCollapsed, path }) => {
-  return (
-    <Links onClick={onClick} to={path}>
-      <MenuItemContainer isActive={isActive}>
-        <MenuIcon src={icon} alt={`${title} icon`} isActive={isActive} />
-        {!isCollapsed && 
-            <MenuTitle>{title}</MenuTitle>
-        }
-      </MenuItemContainer>
-    </Links>
-  );
+const MenuItemWrapper = styled.div`
+  padding: 8px 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #5d87ff;
+    color: #FFFF
+  }
+`;
+
+const MenuItem = ({ children }) => {
+  return <MenuItemWrapper>{children}</MenuItemWrapper>;
 };
 
 MenuItem.propTypes = {
-  icon: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  isCollapsed: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default MenuItem;

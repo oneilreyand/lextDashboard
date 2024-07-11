@@ -7,13 +7,14 @@ import {
   FormContainer,
   ButtonContainer,
 } from './dashboarElements';
+// import { useSelector } from 'react-redux';
 
 import Button from '../../components/Button';
 import Spiner from '../../components/Spiner'
 
 function Dashboard() {
   // const [count, setCount] = useState(0);
-
+  // const user = useSelector((state) => state.auth.user);
   const [inputValues, setInputValues] = useState({
     text: '',
     password: '',
@@ -45,16 +46,6 @@ function Dashboard() {
     }
   };
 
-  // Trigger an error when count reaches 5
-  // useEffect(() => {
-  //   if (count === 5) {
-  //     throw new Error('Count reached 5, causing an intentional error.');
-  //   }
-  // }, [count]);
-
-  // const handleCount = () => {
-  //   setCount(count + 1);
-  // };
 
   return (
     <>

@@ -21,6 +21,9 @@ const TooltipContent = styled.div`
   font-size: 14px;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   transition: opacity 0.3s;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   left: ${({ placement }) =>
     placement === 'right' ? '110%' : placement === 'left' ? '-110%' : '50%'};
   top: ${({ placement }) =>
