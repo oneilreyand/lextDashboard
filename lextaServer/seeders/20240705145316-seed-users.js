@@ -15,7 +15,7 @@ module.exports = {
         phoneNumber: '1234567890',
         role: 'owner',
         avatar: 'https://example.com/avatar1.png',
-        clinicId: '7bc58418-b5e8-49ef-98da-0bf79b606dae', // Clinic ID 1
+        clinicId: '52dc9484-1a53-4e6e-91b5-a2f881da47d2', // Clinic ID 1
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -27,7 +27,7 @@ module.exports = {
         phoneNumber: '0987654321',
         role: 'owner',
         avatar: 'https://example.com/avatar2.png',
-        clinicId: '31ee355b-f6c7-4380-b004-d00805e46ce6', // Clinic ID 2
+        clinicId: '7fba3d9b-1335-4658-9ad7-4e6ee8a68370', // Clinic ID 2
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -3,10 +3,10 @@ const express = require('express');
 const { register, login, checkDoubleLogin } = require('../controllers/authController');
 const router = express.Router();
 const verifyToken = require('../midelwares/verfyToken');
-const rateLimitMiddleware = require('../midelwares/radis/rateLimitMiddleware')
+const loginLimitMiddleware = require('../midelwares/radis/loginLimitMiddleware')
 
 router.post('/register', register);
-router.post('/login',rateLimitMiddleware, login);
+router.post('/login',loginLimitMiddleware, login);
 
 router.get('/checkDoubleLogin', verifyToken, checkDoubleLogin);
 

@@ -15,7 +15,7 @@ import { menuSvg } from '../assets';
 
 const Layout = () => {
   // const ss = useSelector(state => state.global);
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);

@@ -30,6 +30,9 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
+      userInfo: {
+        type: Sequelize.JSONB,
+      },
       clinicId: {
         type: Sequelize.UUID,
         references: {

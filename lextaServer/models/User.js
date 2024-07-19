@@ -5,30 +5,31 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.belongsTo(models.Clinic, {
-        foreignKey: 'clinicId',
-        targetKey: 'id',
-        onDelete: 'CASCADE',
-      });
+      User.belongsTo(models.Clinic, { foreignKey: 'clinicId', onDelete: 'CASCADE' });
+      User.belongsToMany(models.Role, { through: 'UserRoles', as: 'roles', foreignKey: 'userId' });
+      User.belongsToMany(models.Permission, { through: 'UserPermissions', foreignKey: 'userId' });
     }
   }
   User.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
-    role: DataTypes.STRING,
     name: DataTypes.STRING,
     avatar: DataTypes.STRING,
+    userInfo: {
+      type: DataTypes.JSONB,
+      allowNull: true,
+    },
     clinicId: {
       type: DataTypes.UUID,
     },
     token: {
-      type: DataTypes.TEXT, // Mengubah tipe kolom token menjadi TEXT
+      type: DataTypes.TEXT,
     },
   }, {
     sequelize,
@@ -43,9 +44,8 @@ module.exports = (sequelize, DataTypes) => {
           const salt = await bcrypt.genSalt(10);
           user.password = await bcrypt.hash(user.password, salt);
         }
-      }
-    }
+      },
+    },
   });
   return User;
 };
-

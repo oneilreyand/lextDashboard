@@ -125,6 +125,7 @@ const Setting = () => {
 
   useEffect(() => {
     if (clinic) {
+      setDataProfileClinicErrors({});
       setDataProfileClinic({
         name: clinic.name || '',
         phoneNumber: clinic.phoneNumber || '',
@@ -135,7 +136,7 @@ const Setting = () => {
         logo: clinic.logo || '',
       });
     }
-  }, [clinic]);
+  }, [clinic, isEditProfileClinic]);
   
   const handleChangeMenuSetting = (s, m) => {
     setSubMenuTitle(s)
@@ -236,11 +237,6 @@ const Setting = () => {
                     error={dataProfileClinicerrors.name && 'Nama Clinic tidak boleh kosong'}
                     disabled={isEditProfileClinic}
                   />
-                  <DynamicInputWrapper>
-                    <ImageUploader
-                      initialImage={dataProfileClinic.logo}
-                      // onSave={handleSaveImage}
-                    />
                   <DynamicInput 
                     label="Phone Number"
                     placeholder="056474575745" 
@@ -250,6 +246,11 @@ const Setting = () => {
                     error={dataProfileClinicerrors.phoneNumber && 'Nomor telepon tidak boleh kosong'}
                     disabled={isEditProfileClinic}
                   />
+                  <DynamicInputWrapper>
+                    <ImageUploader
+                      initialImage={dataProfileClinic.logo}
+                      // onSave={handleSaveImage}
+                    />
                 </DynamicInputWrapper>
                
                 </DynamicInputWrapper>
@@ -420,7 +421,6 @@ const Setting = () => {
     }
   };
 
-  console.log(dataProfileClinicerrors, 'dataProfileClinicerrors')
 
   return (
     <Container>

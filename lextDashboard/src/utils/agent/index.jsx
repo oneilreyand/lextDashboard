@@ -44,6 +44,9 @@ axiosInstance.interceptors.response.use(
       } else if(error.response.status === 429) {
         console.log(error.response, 'error');
         dispatch(showToast('error',`Terlalu banyak request, ${error.response.data.remainingTimeInMinutes} menit dan ${error.response.data.remainingTimeInSecs} detik`));
+      } else if(error.response.status === 428) {
+        console.log(error.response, 'error');
+        dispatch(showToast('error',`Anda telah melakukan kesalahan dalam login sebanyak tiga kali, waktu login berikutnya adalah', ${error.response.data.remainingTimeInMinutes} menit dan ${error.response.data.remainingTimeInSecs} detik`));
       }
       else if (error.response.status >= 500) {
         dispatch(showToast('error', 'Server error, please try again later.'));

@@ -1,6 +1,6 @@
 const { getAsync, setAsync } = require('./radisConfig'); // Pastikan path dan nama file sesuai dengan konfigurasi Anda
 const logger = require('./loger');
-const rateLimitDuration = 1500; // Durasi dalam detik untuk rate limiting (misalnya, 60 detik)
+const rateLimitDuration = 120; // Durasi dalam detik untuk rate limiting (misalnya, 60 detik)
 const maxRequestsPerDuration = 5; // Jumlah maksimum permintaan dalam durasi tersebut
 
 const rateLimitMiddleware = async (req, res, next) => {

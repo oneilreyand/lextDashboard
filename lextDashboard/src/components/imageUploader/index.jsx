@@ -16,29 +16,32 @@ const Container = styled.div`
   margin-bottom: 20px;
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 150px;
   background-color: #f9f9f9;
 `;
 
 const ImagePreview = styled.img`
   max-width: 100%;
   max-height: 100%;
+  transition: transform 0.3s ease-in-out;
+  
+  &:hover {
+    transform: scale(2);
+  }
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  // position: absolute;
-  bottom: 10px;
-  right: 10px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  flex-diraction: row;
+  flex-direction: row;
   gap: 10px;
 `;
+
 const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
@@ -58,6 +61,7 @@ const ImageUploader = ({ initialImage, onSave }) => {
   const onDrop = (acceptedFiles) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       const selectedFile = acceptedFiles[0];
+      console.log('Dropped file:', selectedFile);
       const objectUrl = URL.createObjectURL(selectedFile);
       setImage(objectUrl);
       setFile(selectedFile);
@@ -66,16 +70,22 @@ const ImageUploader = ({ initialImage, onSave }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: 'image/*',
+    accept: 'image/jpeg, image/png, image/gif', // MIME types yang valid
     multiple: false,
   });
 
   const handleFileSelect = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
-      const objectUrl = URL.createObjectURL(selectedFile);
-      setImage(objectUrl);
-      setFile(selectedFile);
+      console.log('Selected file:', selectedFile);
+      const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (validMimeTypes.includes(selectedFile.type)) {
+        const objectUrl = URL.createObjectURL(selectedFile);
+        setImage(objectUrl);
+        setFile(selectedFile);
+      } else {
+        console.error(`Skipped "${selectedFile.type}" because it is not a valid MIME type.`);
+      }
     }
   };
 
@@ -88,19 +98,6 @@ const ImageUploader = ({ initialImage, onSave }) => {
   return (
     <>
       <Label>Logo Clinic</Label>
-      <Container {...getRootProps()}>
-        <input {...getInputProps()} />
-        {image ? <ImagePreview src={image} alt="Preview" loading="lazy" /> : <p>Drag & drop an image here, or click to select an image</p>}
-        <ButtonsContainer>
-              <input
-                type="file"
-                ref={inputRef}
-                style={{ display: 'none', height: '50px' }}
-                onChange={handleFileSelect}
-                accept="image/*"
-              />
-        </ButtonsContainer>
-      </Container>
       <ButtonWrapper>
         <Button variant="outlined" size='small' onClick={() => inputRef.current.click()}>
           Upload from File
@@ -109,6 +106,19 @@ const ImageUploader = ({ initialImage, onSave }) => {
           Save
         </Button>
       </ButtonWrapper>
+      <Container {...getRootProps()}>
+        <input {...getInputProps()} />
+        {image ? <ImagePreview src={image} alt="Preview" loading="lazy" /> : <p>Drag & drop an image here, or click to select an image</p>}
+        <ButtonsContainer>
+          <input
+            type="file"
+            ref={inputRef}
+            style={{ display: 'none', height: '50px' }}
+            onChange={handleFileSelect}
+            accept="image/jpeg, image/png, image/gif" // MIME types yang valid
+          />
+        </ButtonsContainer>
+      </Container>
     </>
   );
 };
