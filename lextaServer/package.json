@@ -23,7 +23,9 @@
     "sequelize": "^6.37.3",
     "util": "^0.12.5",
     "uuid": "^10.0.0",
-    "winston": "^3.13.0"
+    "winston": "^3.13.0",
+    "@vercel/node": "^1.11.0",
+    "@vercel/static": "^0.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4",
