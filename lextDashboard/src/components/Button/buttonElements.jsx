@@ -59,7 +59,7 @@ const activeStyles = css`
 export const StyledButton = styled.button`
   ${buttonStyles}
   ${({ variant }) => (variant === 'contained' ? containedStyles : outlineStyles)}
-  ${({ isActive }) => isActive && activeStyles}
+  ${({ button_isactive }) => button_isactive && activeStyles}
 `;
 
 export const IconWrapper = styled.span`

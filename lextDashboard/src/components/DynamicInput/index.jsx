@@ -120,6 +120,7 @@ DynamicInput.defaultProps = {
   error: '',
   info: '',
   children: null,
+  disabled: false,
 };
 
 export default DynamicInput;

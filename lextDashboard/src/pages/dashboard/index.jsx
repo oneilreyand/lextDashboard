@@ -1,121 +1,83 @@
-import { useState } from 'react';
-import DynamicInput from '../../components/DynamicInput';
 import {
-  Container,
-  DynamicInputWrapper,
-  FormWrapper,
-  FormContainer,
-  ButtonContainer,
+  ChartWrapper,
+  CardWrapper,
 } from './dashboarElements';
-// import { useSelector } from 'react-redux';
 
-import Button from '../../components/Button';
-import Spiner from '../../components/Spiner'
+import { Container } from '../../utils/GlobalStyle/lextaCore.jsx'
+
+import {
+  Grid,
+  GridItem,
+} from '../../utils/GlobalStyle/lextaCore'
+
+import LineChart from '../../components/LineChart.js';
+import BarChart from '../../components/BarChart/index.jsx';
+import Card from '../../components/Card';
 
 function Dashboard() {
-  // const [count, setCount] = useState(0);
-  // const user = useSelector((state) => state.auth.user);
-  const [inputValues, setInputValues] = useState({
-    text: '',
-    password: '',
-    dropdown: '',
-  });
-  const [errors, setErrors] = useState({
-    text: '',
-    password: '',
-    dropdown: '',
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInputValues({
-      ...inputValues,
-      [name]: value
-    });
-
-    if (!value) {
-      setErrors({
-        ...errors,
-        [name]: 'Field cannot be empty'
-      });
-    } else {
-      setErrors({
-        ...errors,
-        [name]: ''
-      });
-    }
-  };
+  const cardContent = [
+    {
+      title: 'Total Revenue',
+      total: 478340000,
+      monthlyRevenueDifference: 0.02,
+    },
+    {
+      title: 'Total Pendaftaran',
+      total: 412,
+      monthlyRevenueDifference: 2,
+    },
+    {
+      title: 'Total Cabang',
+      total: 2,
+      monthlyRevenueDifference: 0,
+    },
+    {
+      title: 'Total Agen',
+      total: 354,
+      monthlyRevenueDifference: 5,
+    },
+  ]
 
 
   return (
-    <>
-      <Container>
-        Form Control
-        <FormContainer>
-          <FormWrapper>
-            <DynamicInputWrapper>
-              <DynamicInput 
-                label="Text"
-                placeholder="Text" 
-                value={inputValues.userName} 
-                name="text"
-                onChange={handleChange} 
-                error={errors.userName}
-              />
-              <DynamicInput 
-                label="Password"
-                placeholder="Password" 
-                name="password"
-                value={inputValues.password} 
-                onChange={handleChange} 
-                type="password"
-                error={errors.password}
-                info="Password anda harus lebih besar dari 6 digit"
-              />
-              <DynamicInput 
-                label="Disabled Input"
-                placeholder="Disabled input" 
-                disabled 
-              />
-            </DynamicInputWrapper>
-            <DynamicInputWrapper>
-            </DynamicInputWrapper>
-            <DynamicInputWrapper>
-            </DynamicInputWrapper>
-          </FormWrapper>
-          <FormWrapper>
-            <DynamicInputWrapper>
-            <DynamicInput
-              type="select"
-              label="Dropdown"
-              placeholder="Select an option"
-              name="dropdown"
-              value={inputValues.dropdown}
-              onChange={handleChange}
-              options={[
-                { value: 'option1', label: 'Option 1' },
-                { value: 'option2', label: 'Option 2' },
-                { value: 'option3', label: 'Option 3' },
-              ]}
-              error={errors.dropdown}
-            />
-            </DynamicInputWrapper>
-            <ButtonContainer>
-              <Button variant="contained" size="large">Contained Large Button</Button>
-              <Button variant="outline" size="large">Outline Small Button</Button>
-              <Button variant="contained" size="small" disabled>Disabled Button</Button>
-              {/* <Button variant="outline" size="small" icon={<Spiner size={20} color={'secondary'} />} iconPosition="left">
-                icon on left
-              </Button> */}
-              <Button variant="outline" size="small" icon={<Spiner size={20} color={'secondary'}/>} iconPosition="right">
-                Icon on Right
-              </Button>
-            </ButtonContainer>
-          </FormWrapper>
-        </FormContainer>
-      </Container>
-    </>
+    <Container>
+      <Grid>
+        <GridItem>
+          <CardWrapper>
+            {cardContent.map((card, i) => (
+              <Card key={i} data={card}/>
+            ))}
+          </CardWrapper>
+        </GridItem>
+      </Grid>
+      <Grid size={12}>
+        <GridItem>
+          <ChartWrapper style={{ marginTop: 30, marginBottom: 30 }}>
+            <LineChart data={[]}/>
+          </ChartWrapper>
+        </GridItem>
+      </Grid>
+      <Grid size={6}>
+        <GridItem>
+          <ChartWrapper
+            style={{
+              height: '500px',
+              width: '500px',
+            }}
+          >
+            Grafik Penjualan Produk
+            <BarChart data={[]}/>
+            sdfsdfsd
+          </ChartWrapper>
+        </GridItem>
+        <GridItem>
+        </GridItem>
+      </Grid>
+    </Container>
   );
+}
+
+Dashboard.propTypes = {
 }
 
 export default Dashboard;

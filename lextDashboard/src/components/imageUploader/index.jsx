@@ -97,7 +97,7 @@ const ImageUploader = ({ initialImage, onSave }) => {
 
   return (
     <>
-      <Label>Logo Clinic</Label>
+      <Label>Logo Travel</Label>
       <ButtonWrapper>
         <Button variant="outlined" size='small' onClick={() => inputRef.current.click()}>
           Upload from File

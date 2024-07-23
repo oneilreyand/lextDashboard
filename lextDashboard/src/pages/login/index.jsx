@@ -11,10 +11,13 @@ import {
   PasswordWrapper,
   IconButton,
   IconButtonWrapper,
+  LogoIcon,
+  FallingButton,
 } from './loginElements';
 import {
   eyesvg,
   eyeslashsvg,
+  sahabatUmrahLogoWhite,
 } from '../../assets';
 
 const LoginPage = () => {
@@ -102,8 +105,16 @@ const LoginPage = () => {
   return (
     <Container noPadding style={{ height: '100vh' }}>
       <Grid direction="row" size={6}>
-        <GridItem style={{ width: '50%', height: '100vh', background: '#5D87ff' }}>
+        <GridItem style={{ 
+          width: '50%',
+          height: '100vh',
+          background: '#5D87ff',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          }}>
           {/* You can add content here for the left side */}
+          <LogoIcon src={sahabatUmrahLogoWhite}/>
         </GridItem>
         <GridItem style={{ width: '50%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <form style={{ width: '80%', maxWidth: '400px' }} onSubmit={handleLogin}>
@@ -133,15 +144,17 @@ const LoginPage = () => {
                   src={showPassword ? eyesvg : eyeslashsvg}/>
               </IconButtonWrapper>
             </PasswordWrapper>
-            <Button
-              variant='contained'
-              type="submit"
-              icon={loginLoading && <Spiner size={20} color={'secondary'} />}
-              iconPosition="right"
-              disabled={loginLoading}
-            >
-              Log In
-            </Button>
+            <FallingButton>
+              <Button
+                variant='contained'
+                type="submit"
+                icon={loginLoading && <Spiner size={20} color={'secondary'} />}
+                iconPosition="right"
+                disabled={loginLoading}
+              >
+                Log In
+              </Button>
+            </FallingButton>
           </form>
         </GridItem>
       </Grid>

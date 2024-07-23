@@ -1,14 +1,15 @@
 // routes/index.js
 const express = require('express');
-const authRouter = require('./authRouter');
-const clinicRouter = require('./clinicRouter');
-const userRouter = require('./userRouter');
-
 const router = express.Router();
 
+const travelRouter = require('./travelRouter');
+const cabangRouter = require('./cabangRouter');
+const userRouter = require('./userRouter');
+const authRouter = require('./authRouter');
 
 router.use('/auth', authRouter);
-router.use('/clinic', clinicRouter);
-router.use('/users', userRouter);
+router.use('/travel', travelRouter);
+router.use('/cabang', cabangRouter);
+router.use('/user', userRouter);
 
 module.exports = router;

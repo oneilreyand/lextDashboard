@@ -1,13 +1,14 @@
 import {
     layoutGridSvg,
     settingsSvg,
-    capsullSvg,
+    // capsullSvg,
     userSvg,
     walletSvg,
     dataSvg,
-    aidBagSvg,
+    // aidBagSvg,
     listSquareSvg,
-    vaccineSvg
+    airPlaneSvg,
+    alarmSvg,
 } from '../assets/index'; // Importing the SVG as a URL
 
 const menu = [
@@ -19,46 +20,46 @@ const menu = [
     },
     {
         id: 2,
-        title: 'Pasien',
+        title: 'Jammah',
         icon: userSvg,
-        path: '/pasien'
+        path: '/jamaah'
     },
     {
         id: 3,
-        title: 'Rawat Jalan',
+        title: 'Pendaftaran Jamaah',
         icon: listSquareSvg,
-        path: '/rawatJalan'
+        path: '/pendaftaranJamaah'
     },
     {
         id: 4,
-        title: 'Rawat Inap',
-        icon: listSquareSvg,
-        path: '/rawatInap'
+        title: 'Manivest',
+        icon: airPlaneSvg,
+        path: '/manivest'
     },
     {
         id: 5,
-        title: 'Lab',
-        icon: vaccineSvg,
-        path: '/lab'
+        title: 'Schedule',
+        icon: alarmSvg,
+        path: '/schedule'
     },
-    {
-        id: 4,
-        title: 'Apotek',
-        icon: capsullSvg,
-        path: '/apotek'
-    },
+    // {
+    //     id: 4,
+    //     title: 'Apotek',
+    //     icon: capsullSvg,
+    //     path: '/apotek'
+    // },
     {
         id: 6,
         title: 'Kasir',
         icon: walletSvg,
         path: '/kasir'
     },
-    {
-        id: 7,
-        title: 'Bpjs',
-        icon: aidBagSvg,
-        path: '/bpjs'
-    },
+    // {
+    //     id: 7,
+    //     title: 'Bpjs',
+    //     icon: aidBagSvg,
+    //     path: '/bpjs'
+    // },
     {
         id: 8,
         title: 'Laporan',

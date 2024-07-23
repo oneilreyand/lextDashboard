@@ -2,7 +2,16 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from '../utils/privateRoute';
 import PublicRoute from '../utils/publickRoute'; // Perbaikan typo: "publicRoute"
 import IdleRoute from './idleRouter'; // Import IdleRoute
-import { Dashboard, Error404, Setting, ContentSatu, Login, Patient } from '../pages';
+import {
+  Dashboard,
+  Error404,
+  Setting,
+  ContentSatu,
+  Login,
+  Patient,
+  TravelSchedule,
+  Register,
+} from '../pages';
 import Layout from './layout';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '../pages/errorBoundry';
@@ -34,7 +43,7 @@ const AppRouter = () => {
               }
             />
             <Route
-              path="/rawatJalan"
+              path="/pendaftaranJamaah"
               element={
                 <PrivateRoute>
                   <IdleRoute>
@@ -44,11 +53,21 @@ const AppRouter = () => {
               }
             />
             <Route
-              path="/pasien"
+              path="/jamaah"
               element={
                 <PrivateRoute>
                   <IdleRoute>
                     <Patient />
+                  </IdleRoute>
+                </PrivateRoute>
+              }
+            />
+             <Route
+              path="/schedule"
+              element={
+                <PrivateRoute>
+                  <IdleRoute>
+                    <TravelSchedule />
                   </IdleRoute>
                 </PrivateRoute>
               }
@@ -70,7 +89,7 @@ const AppRouter = () => {
             path="/register"
             element={
               <PublicRoute>
-                <div>Register Page</div>
+                <Register/>
               </PublicRoute>
             }
           />

@@ -6,6 +6,8 @@ import SignaturePad from '../../components/SignaturePad';
 import Pagination from '../../components/Pagenation';
 import SearchComponent from '../../components/SearchInput';
 import SlideModal from '../../components/SlideModal';
+// import DatePicker from '../../components/DatePicker';
+// import TimePicker from '../../components/TimePicker';
 import { 
   Container,
   Grid,
@@ -46,6 +48,11 @@ const ContentSatu = () => {
   const [isLoadingSearch, setIsloadingSearch] = useState(false);
   const [filteredData, setFilteredData] = useState(dataPatient);
   const [isPendaftaranOpen, setIsPendaftaranOpen] = useState(false);
+  // const [date, setDate] = useState('');
+  // const [time, setTime] = useState('');
+
+  // const handleDateChange = (e) => setDate(e.target.value);
+  // const handleTimeChange = (e) => setTime(e.target.value);
 
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -129,14 +136,15 @@ const ContentSatu = () => {
             size='large'
             onClick={handleOpenPendaftaran}
           >
-            Pendaftaran Pasien
+            Pendaftaran Jamaah
           </Button>
+
         </GridItem>
        </Grid>
       <Container>
         <Modal
           size="large"
-          title="Pendaftaran Pasien"
+          title="Pendaftaran Jamah"
           subtitle=""
           onClose={handleClosePendaftaran}
           // onSubmit={handleSubmit}
@@ -169,6 +177,12 @@ const ContentSatu = () => {
               onSearch={handleSearch}
               isLoading={isLoadingSearch}
             />
+          </GridItem>
+          <GridItem>
+            {/* <DatePicker label="Select Date:" value={date} onChange={handleDateChange} /> */}
+          </GridItem>
+          <GridItem>
+            {/* <TimePicker label="Select Time:" value={time} onChange={handleTimeChange} /> */}
           </GridItem>
         </Grid>
         <Grid direction={'row'} size={12}>
@@ -218,7 +232,6 @@ const ContentSatu = () => {
                 </TableBody>
               </Table>
             </ScrollableTableContainer>
-              
               <Pagination
                 currentPage={currentPage}
                 rowsPerPage={rowsPerPage}

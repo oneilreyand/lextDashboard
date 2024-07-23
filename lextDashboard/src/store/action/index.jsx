@@ -15,6 +15,7 @@ export const HIDE_TOAST = 'HIDE_TOAST';
 
 // USER
 export const GET_USER = 'GET_USER';
+export const CREATE_USER = 'CREATE_USER';
 
 // PATIENT
 export const GET_PATIENT = 'GET_PATIENT';
@@ -24,5 +25,5 @@ export const SET_MENU_ITEM_SELECTED = 'SET_MENU_ITEM_SELECTED';
 export const SET_IS_COLLAPSE = 'SET_IS_COLLAPSE';
 
 // CLINIC 
-export const GET_CLINIC_BY_ID = 'GET_CLINIC_BY_ID';
+export const GET_TRAVEL_BY_ID = 'GET_TRAVEL_BY_ID';
 export const UPDATE_CLINIC_BY_ID = 'UPDATE_CLINIC_BY_ID';

@@ -5,6 +5,8 @@ import ContentSatu from './content1';
 import Login from './login';
 import Patient from './patient';
 import PatientContent from './patientContent';
+import TravelSchedule from "./schedule";
+import Register from './Register';
 
 export {
     Dashboard,
@@ -14,4 +16,6 @@ export {
     Login,
     Patient,
     PatientContent,
+    TravelSchedule,
+    Register,
 };

@@ -5,7 +5,7 @@ import patinetReducer from './patientReducer';
 import authReducer from './authReducer';
 import snackbarReducer from './snacbarrReducer';
 import toastReducer from './toastReducer';
-import cliniReducer from './clinicReducer';
+import travelReducer from './travelReducer';
 
 const rootReducer = combineReducers({
   global: globalReducer, // Naming reducers can also help in distinguishing them
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   snackbar: snackbarReducer,
   toast: toastReducer,
-  clinic: cliniReducer,
+  travel: travelReducer,
 });
 
 export default rootReducer;

@@ -32,3 +32,16 @@ export const ButtonContainer = styled.div`
   padding: 1rem; /* Tambahkan padding jika diperlukan */
   width: 100%; /* Sesuaikan lebar kontainer tombol */
 `;
+
+export const ChartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+`
+
+export const CardWrapper = styled.div`
+    display: flex;
+    gap: 2rem;
+`;

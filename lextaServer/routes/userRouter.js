@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../midelwares/verfyToken');
-const UserController = require('../controllers/userControler');
+const userController = require('../controllers/userController');
 
-router.post('/', UserController.createUser);
-router.get('/:id', UserController.getUserById);
-router.put('/:id', UserController.updateUser);
-router.delete('/:id', UserController.deleteUser);
+// CRUD operations for User
+router.post('/', userController.create);
+router.get('/', userController.getAll);
+router.get('/:id', userController.getById);
+router.put('/:id', userController.update);
+router.delete('/:id', userController.delete);
 
 module.exports = router;

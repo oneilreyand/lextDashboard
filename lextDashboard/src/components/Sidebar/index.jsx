@@ -22,8 +22,8 @@ import LazyAvatar from '../LazyAvatar';
 import MenuItem from '../SidebarMenu';
 import { menu } from '../../data';
 import {
-  lexLogoSvg,
-  lexLogotextSvg,
+  sahabatUmrahLogo,
+  sahabatUmrahLogoText,
   chevronRightSvg,
   chevronleftSvg,
 } from '../../assets';
@@ -78,9 +78,9 @@ function Sidebar({ isCollapsed }) {
   return (
     <SidebarContainer isCollapsed={isCollapsed}>
       <LogoWraaping>
-        <LogoSvg src={lexLogoSvg} alt='logo-svg'/>
+        <LogoSvg src={sahabatUmrahLogo} alt='logo-svg'/>
         {!isCollapsed &&
-          <LogoSvgText src={lexLogotextSvg} alt='logo-svg'/>
+          <LogoSvgText src={sahabatUmrahLogoText} alt='logo-svg'/>
         }
       </LogoWraaping>
       {isCollapsed ? '...' : 'Menu'}
@@ -106,10 +106,10 @@ function Sidebar({ isCollapsed }) {
             />
             <InfoAvatarWrapper>
               <Name>
-                Dr. Suci ningsih Spd
+                Suci Rahmadani
               </Name>
               <Role>
-                Penyakit Dalam
+                Admin
               </Role>
             </InfoAvatarWrapper>
             <ProfileMenuWrapper>

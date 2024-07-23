@@ -1,13 +1,13 @@
-// routes/authRouter.js
 const express = require('express');
-const { register, login, checkDoubleLogin } = require('../controllers/authController');
 const router = express.Router();
-const verifyToken = require('../midelwares/verfyToken');
-const loginLimitMiddleware = require('../midelwares/radis/loginLimitMiddleware')
+const authController = require('../controllers/authController');
 
-router.post('/register', register);
-router.post('/login',loginLimitMiddleware, login);
+// Register route
+router.post('/register', authController.register);
 
-router.get('/checkDoubleLogin', verifyToken, checkDoubleLogin);
+// Login route
+router.post('/login', authController.login);
+
+// Protect routes using the authenticate middleware
 
 module.exports = router;

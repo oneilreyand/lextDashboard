@@ -19,7 +19,7 @@ import { Container, Grid, GridItem } from '../../utils/GlobalStyle/lextaCore';
 import DynamicInput from '../../components/DynamicInput';
 import Button from '../../components/Button';
 import Spiner from '../../components/Spiner'
-import { getClinicById, updateClinic } from '../../store/action/clinicAction';
+import { getTravelById, updateTravel } from '../../store/action/travelAction';
 import { useEffect } from 'react';
 import ImageUploader from '../../components/imageUploader/index'
 import MenuItem from '../../components/MenuItem';
@@ -29,8 +29,8 @@ import MenuItem from '../../components/MenuItem';
 const settingMenu = [
   {
     id: 1,
-    mainMenu: 'Clinik',
-    subMenu: ['Profile Clinic', 'Pks', 'Print Template']
+    mainMenu: 'Travel',
+    subMenu: ['Profile Travel', 'Pks', 'Print Template']
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const settingMenu = [
   {
     id: 3,
     mainMenu: 'Employe',
-    subMenu: ['Doctor', 'Perawat', 'Apoterker', 'Staf']
+    subMenu: ['Admin', 'Finace', 'Admin Gudang', 'Staf Operasional']
   },
   {
     id: 4,
@@ -104,14 +104,14 @@ const propinsi = [
 const Setting = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const clinic = useSelector((state) => state.clinic.dataClinic);
-  const [submenuTitle, setSubMenuTitle] = useState('Profile Clinic')
-  const [menuTitle, setMenuTitle] = useState({mainMenu: 'Clinik'})
-  const [isEditProfileClinic, setIsEditProfileClinic] = useState(true);
+  const travel = useSelector((state) => state.travel.dataTravel);
+  const [submenuTitle, setSubMenuTitle] = useState('Profile travel')
+  const [menuTitle, setMenuTitle] = useState({mainMenu: 'Travel'})
+  const [isEditProfileTravel, setIsEditProfileTravel] = useState(true);
   const [loading, setLoading] = useState(false);
-  console.log(clinic, 'data clinic');
+  console.log(user, 'data travel');
 
-  const [dataProfileClinic, setDataProfileClinic] = useState({
+  const [dataProfileTravel, setDataProfileTravel] = useState({
     name: '',
     phoneNumber: '',
     address: '',
@@ -121,41 +121,41 @@ const Setting = () => {
     logo: '',
   });
   
-  const [dataProfileClinicerrors, setDataProfileClinicErrors] = useState({});
+  const [dataProfileTravelerrors, setDataProfileTravelErrors] = useState({});
 
   useEffect(() => {
-    if (clinic) {
-      setDataProfileClinicErrors({});
-      setDataProfileClinic({
-        name: clinic.name || '',
-        phoneNumber: clinic.phoneNumber || '',
-        address: clinic.address || '',
-        propinsi: clinic.propinsi || '',
-        kota: clinic.kota || '',
-        kelurahan: clinic.kelurahan || '',
-        logo: clinic.logo || '',
+    if (travel) {
+      setDataProfileTravelErrors({});
+      setDataProfileTravel({
+        name: travel.name || '',
+        phoneNumber: travel.phoneNumber || '',
+        address: travel.address || '',
+        propinsi: travel.propinsi || '',
+        kota: travel.kota || '',
+        kelurahan: travel.kelurahan || '',
+        logo: travel.logo || '',
       });
     }
-  }, [clinic, isEditProfileClinic]);
+  }, [travel, isEditProfileTravel]);
   
   const handleChangeMenuSetting = (s, m) => {
     setSubMenuTitle(s)
     setMenuTitle(m)
     if(s === 'Profile Clinic') {
       console.log(user, 'data user')
-      dispatch(getClinicById(user.clinicId))
+      dispatch(getTravelById(user.travelId))
     }
   }
 
   const handleEditProfileClinic = () => {
-    setIsEditProfileClinic(!isEditProfileClinic)
+    setIsEditProfileTravel(!isEditProfileTravel)
   }
 
 
   const handleChangeClinicProfile = (event) => {
     const { name, value } = event.target;
-    setDataProfileClinic({
-      ...dataProfileClinic,
+    setDataProfileTravel({
+      ...dataProfileTravel,
       [name]: value
     });
    
@@ -231,24 +231,24 @@ const Setting = () => {
                   <DynamicInput 
                     label="Nama Clinic"
                     placeholder="Clinic Name" 
-                    value={dataProfileClinic.name} 
+                    value={dataProfileTravel.name} 
                     name="name"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileClinicerrors.name && 'Nama Clinic tidak boleh kosong'}
-                    disabled={isEditProfileClinic}
+                    error={dataProfileTravelerrors.name && 'Nama Clinic tidak boleh kosong'}
+                    disabled={isEditProfileTravel}
                   />
                   <DynamicInput 
                     label="Phone Number"
                     placeholder="056474575745" 
-                    value={dataProfileClinic.phoneNumber} 
+                    value={dataProfileTravel.phoneNumber} 
                     name="phoneNumber"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileClinicerrors.phoneNumber && 'Nomor telepon tidak boleh kosong'}
-                    disabled={isEditProfileClinic}
+                    error={dataProfileTravelerrors.phoneNumber && 'Nomor telepon tidak boleh kosong'}
+                    disabled={isEditProfileTravel}
                   />
                   <DynamicInputWrapper>
                     <ImageUploader
-                      initialImage={dataProfileClinic.logo}
+                      initialImage={dataProfileTravel.logo}
                       // onSave={handleSaveImage}
                     />
                 </DynamicInputWrapper>
@@ -262,20 +262,20 @@ const Setting = () => {
                 <DynamicInput 
                     label="Alamat"
                     placeholder="Alamat" 
-                    value={dataProfileClinic.address} 
+                    value={dataProfileTravel.address} 
                     name="address"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileClinicerrors.address && 'Alamat Clinic tidak boleh kosong'}
-                    disabled={isEditProfileClinic}
+                    error={dataProfileTravelerrors.address && 'Alamat Clinic tidak boleh kosong'}
+                    disabled={isEditProfileTravel}
                   />
                  <DynamicInput 
                     label="Propinsi"
                     placeholder="Propinsi" 
-                    value={dataProfileClinic.propinsi} 
+                    value={dataProfileTravel.propinsi} 
                     name="propinsi"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileClinicerrors.propinsi && 'Propinsi tidak boleh kosong'}
-                    disabled={isEditProfileClinic}
+                    error={dataProfileTravelerrors.propinsi && 'Propinsi tidak boleh kosong'}
+                    disabled={isEditProfileTravel}
                   >
                     {propinsi.map((e, i) => (
                     <MenuItem key={`${i}+1`}>
@@ -286,29 +286,29 @@ const Setting = () => {
                  <DynamicInput 
                     label="Kota / Kabupaten"
                     placeholder="Kota" 
-                    value={dataProfileClinic.kota} 
+                    value={dataProfileTravel.kota} 
                     name="kota"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileClinicerrors.kota && 'Kota tidak boleh kosong'}
-                    disabled={isEditProfileClinic}
+                    error={dataProfileTravelerrors.kota && 'Kota tidak boleh kosong'}
+                    disabled={isEditProfileTravel}
                   />
                   <DynamicInput 
                     label="Kelurahan"
                     placeholder="Kelurahan" 
-                    value={dataProfileClinic.kelurahan} 
+                    value={dataProfileTravel.kelurahan} 
                     name="kelurahan"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileClinicerrors.kelurahan && 'kelurahan tidak boleh kosong'}
-                    disabled={isEditProfileClinic}
+                    error={dataProfileTravelerrors.kelurahan && 'kelurahan tidak boleh kosong'}
+                    disabled={isEditProfileTravel}
                   />
                 </DynamicInputWrapper>
              
                 {/* <LogoImage src={clinic.logo} alt="Clinic Logo" /> */}
                 <ButtonContainer>
                   <Button variant="contained" size="large" onClick={handleEditProfileClinic}>
-                    {isEditProfileClinic ? 'Edit Profile' : 'Cancel Edit Profile'}
+                    {isEditProfileTravel ? 'Edit Profile' : 'Cancel Edit Profile'}
                     </Button>
-                  {!isEditProfileClinic &&
+                  {!isEditProfileTravel &&
                     <Button
                       variant="outline"
                       size="small"
@@ -363,42 +363,42 @@ const Setting = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInputValues({
-      ...dataProfileClinic,
+      ...dataProfileTravel,
       [name]: value
     });
 
     if (!value) {
       // setErrors({
-      //   ...dataProfileClinicerrors,
+      //   ...dataProfileTravelerrors,
       //   [name]: 'Field cannot be empty'
       // });
     } else {
-      setDataProfileClinicErrors({
-        ...dataProfileClinicerrors,
+      setDataProfileTravelErrors({
+        ...dataProfileTravelerrors,
         [name]: ''
       });
     }
   };
 
   useEffect(() => {
-    dispatch(getClinicById(user.clinicId))
-  }, [dispatch, user.clinicId])
+    dispatch(getTravelById(user.travelId))
+  }, [dispatch, user.travelId])
 
   const hasErrors = () => {
-    const dataProfileClinicErrors = {}
-    console.log(dataProfileClinicErrors , 'data errors');
+    const dataProfileTravelErrors = {}
+    console.log(dataProfileTravelErrors , 'data errors');
 
-    Object.keys(dataProfileClinic).forEach(key => {
-      if (dataProfileClinic[key].trim() === '') {
-        dataProfileClinicErrors[key] = true; // Set error menjadi true untuk properti yang kosong
+    Object.keys(dataProfileTravel).forEach(key => {
+      if (dataProfileTravel[key].trim() === '') {
+        dataProfileTravelErrors[key] = true; // Set error menjadi true untuk properti yang kosong
       } else {
-        dataProfileClinicErrors[key] = false; // Set error menjadi false jika properti tidak kosong
+        dataProfileTravelErrors[key] = false; // Set error menjadi false jika properti tidak kosong
       }
     });
-    console.log(dataProfileClinicErrors , 'data errors');
+    console.log(dataProfileTravelErrors , 'data errors');
 
-    setDataProfileClinicErrors(dataProfileClinicErrors)
-    return Object.values(dataProfileClinicErrors).some(error => error === true);
+    setDataProfileTravelErrors(dataProfileTravelErrors)
+    return Object.values(dataProfileTravelErrors).some(error => error === true);
   }
 
   const handleEditClinicProfile = async () => {
@@ -408,9 +408,9 @@ const Setting = () => {
     setLoading(true);
     if (!errors) {
       try {
-        dispatch(updateClinic(user.clinicId, dataProfileClinic));
+        dispatch(updateTravel(user.travelId, dataProfileTravel));
         dispatch(showToast('success', 'Berhasi update data profile clinic'));
-        setIsEditProfileClinic(true);
+        setIsEditProfileTravel(true);
         setLoading(false);
       } catch (error) {
         console.log(error);

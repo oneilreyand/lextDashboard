@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
   button {
     font-family: inherit;
   }
+  
 `;
 
 export default GlobalStyle;

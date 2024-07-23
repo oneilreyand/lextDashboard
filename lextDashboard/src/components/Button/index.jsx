@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { StyledButton, IconWrapper } from './buttonElements';
 
-const Button = ({ variant, size, disabled, children, icon, iconPosition, isActive, onClick }) => (
-  <StyledButton variant={variant} size={size} disabled={disabled} isActive={isActive} onClick={onClick}>
+const Button = ({ variant, size, disabled, children, icon, iconPosition, button_isactive, onClick }) => (
+  <StyledButton variant={variant} size={size} disabled={disabled} button_isactive={button_isactive} onClick={onClick}>
     {icon && iconPosition === 'left' && <IconWrapper iconPosition={iconPosition}>{icon}</IconWrapper>}
     {children}
     {icon && iconPosition === 'right' && <IconWrapper iconPosition={iconPosition}>{icon}</IconWrapper>}
@@ -16,7 +16,7 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   icon: PropTypes.node,
   iconPosition: PropTypes.oneOf(['left', 'right']),
-  isActive: PropTypes.bool,
+  button_isactive: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 
@@ -24,7 +24,8 @@ Button.defaultProps = {
   disabled: false,
   icon: null,
   iconPosition: 'left',
-  isActive: false,
+  button_isactive: false,
+  variant: 'contained',
 };
 
 export default Button;

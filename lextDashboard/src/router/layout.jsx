@@ -12,6 +12,7 @@ import {
   HeaderWrapper,
 } from './layoutElements';
 import { menuSvg } from '../assets';
+import LinearDeterminate from '../components/LinierDerteminate';
 
 const Layout = () => {
   // const ss = useSelector(state => state.global);
@@ -25,6 +26,7 @@ const Layout = () => {
     <LayoutContainer>
       <SideBar isCollapsed={isCollapsed} />
       <ContentContainer>
+        <LinearDeterminate/>
         <HeaderWrapper>
           <ToggleButton src={menuSvg} onClick={toggleSidebar} isCollapsed={isCollapsed} />
         </HeaderWrapper>

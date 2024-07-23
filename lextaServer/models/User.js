@@ -5,31 +5,66 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.belongsTo(models.Clinic, { foreignKey: 'clinicId', onDelete: 'CASCADE' });
-      User.belongsToMany(models.Role, { through: 'UserRoles', as: 'roles', foreignKey: 'userId' });
-      User.belongsToMany(models.Permission, { through: 'UserPermissions', foreignKey: 'userId' });
+      // A User belongs to a Cabang
+      User.belongsTo(models.Cabang, { foreignKey: 'cabangId', onDelete: 'CASCADE' });
+      // A User belongs to a Travel
+      User.belongsTo(models.Travel, { foreignKey: 'travelId', onDelete: 'CASCADE' });
     }
   }
+
   User.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
-    name: DataTypes.STRING,
-    avatar: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    avatar: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     userInfo: {
       type: DataTypes.JSONB,
       allowNull: true,
     },
-    clinicId: {
+    travelId: {
       type: DataTypes.UUID,
+      allowNull: true,
+    },
+    cabangId: {
+      type: DataTypes.UUID,
+      allowNull: true,
     },
     token: {
       type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    refreshToken: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    isAgent: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   }, {
     sequelize,
@@ -47,5 +82,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
+
   return User;
 };

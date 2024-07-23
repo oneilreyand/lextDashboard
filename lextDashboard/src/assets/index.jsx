@@ -10,12 +10,22 @@ import listSquareSvg from './listSquareSvg.svg';
 import menuSvg from './menuSvg.svg';
 import closeSvg from './closeSvg.svg';
 import searchSvg from './searchSvg.svg';
-import lexLogoSvg from './lexLogoSvg.svg';
-import lexLogotextSvg from './lexLogotextSvg.svg';
 import chevronleftSvg from './chevron-left-Svg.svg';
 import chevronRightSvg from './chevron-right-Svg.svg';
 import eyesvg from './eyesvg.svg';
 import eyeslashsvg from './eyeslashsvg.svg';
+import airPlaneSvg from './airplaneSvg.svg';
+import alarmSvg from './alarmSvg.svg';
+import sahabatUmrahLogo from './sahabatUmrahlogo.svg';
+import sahabatUmrahLogoText from './SahabatUmrahLogoText.svg';
+import sahabatUmrahLogoWhite from './sahabatUmrahLogoWhite.svg';
+import bankSvg from './bankSvg.svg';
+import registrasiJamaahSvg from './registrasiJamaahSvg.svg';
+import cabangSvg from './cabangSvg.svg';
+import agenSvg from './agenSvg.svg';
+import arrowUp from './arrowUpSvg.svg';
+
+
 
 
  
@@ -32,10 +42,18 @@ export {
     menuSvg,
     closeSvg,
     searchSvg,
-    lexLogoSvg,
-    lexLogotextSvg,
     chevronRightSvg,
     chevronleftSvg,
     eyesvg,
     eyeslashsvg,
+    airPlaneSvg,
+    alarmSvg,
+    sahabatUmrahLogo,
+    sahabatUmrahLogoText,
+    sahabatUmrahLogoWhite,
+    bankSvg,
+    registrasiJamaahSvg,
+    cabangSvg,
+    agenSvg,
+    arrowUp,
 };

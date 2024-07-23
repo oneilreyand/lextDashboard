@@ -11,7 +11,7 @@ const IdleRoute = ({ children }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(15);
-  const isIdle = useIdle(120000);
+  const isIdle = useIdle(120000); // 2 minutes idle timeout
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,11 +20,12 @@ const IdleRoute = ({ children }) => {
     if (isIdle) {
       setShowModal(true);
       countdownInterval = setInterval(() => {
-        setCountdown((prevCountdown) => {
+        setCountdown(prevCountdown => {
           if (prevCountdown === 1) {
             clearInterval(countdownInterval);
             dispatch(logout());
             navigate('/login');
+            return 0; // Ensure countdown is set to 0 after logout
           }
           return prevCountdown - 1;
         });
@@ -34,7 +35,9 @@ const IdleRoute = ({ children }) => {
       setCountdown(15);
     }
 
-    return () => clearInterval(countdownInterval);
+    return () => {
+      clearInterval(countdownInterval);
+    };
   }, [isIdle, navigate, dispatch]);
 
   const handleCloseModal = () => {

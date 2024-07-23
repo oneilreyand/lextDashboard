@@ -134,7 +134,7 @@ export const ProfileMenuItem = styled.div`
   padding: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-bottom: solid 0.5px gray; 
+  // border-bottom: solid 0.5px gray; 
   font-weight: 300;
   font-size: 0.9rem;
   &:hover {
