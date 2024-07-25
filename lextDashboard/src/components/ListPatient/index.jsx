@@ -25,7 +25,7 @@ const ListPatient = ({ patients, onPatientClick }) => {
       {patients.map((patient, index) => (
         <ListPatientItem
           key={index}
-          isActive={activeIndex === index}
+          isActive={activeIndex === index ? true : false}
           onClick={() => handleClick(index, patient)}
         >
           {patient.name}

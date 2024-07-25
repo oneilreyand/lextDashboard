@@ -19,6 +19,7 @@ import {
   eyeslashsvg,
   sahabatUmrahLogoWhite,
 } from '../../assets';
+import CustomLink from '../../components/CustomLink';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -92,7 +93,6 @@ const LoginPage = () => {
         })
         // Handle login logic here
       } catch (error) {
-        console.log(error);
         setLoginLoading(false);
       }
     }
@@ -155,6 +155,9 @@ const LoginPage = () => {
                 Log In
               </Button>
             </FallingButton>
+          <p>
+            I dont have an account? <CustomLink to="/register">register here</CustomLink>
+          </p>
           </form>
         </GridItem>
       </Grid>

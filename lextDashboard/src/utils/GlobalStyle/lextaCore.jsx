@@ -45,6 +45,5 @@ export const ButtonContainer = styled.div`
 `;
 
 export const ScrollableTableContainer = styled.div`
-  // width: 100%;
   overflow-x: auto;
 `;

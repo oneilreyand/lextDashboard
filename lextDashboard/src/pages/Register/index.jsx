@@ -9,6 +9,7 @@ import {
 import DynamicInput from '../../components/DynamicInput';
 import Button from '../../components/Button';
 import Spiner from '../../components/Spiner';
+import CustomLink from '../../components/CustomLink';
 import {
   PasswordWrapper,
   IconButton,
@@ -106,7 +107,7 @@ const LoginPage = () => {
       try {
         setCurrentStep(1);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
@@ -158,8 +159,6 @@ const LoginPage = () => {
         // Await the dispatch to get the response
         const travel = await dispatch(createTravel(dataTravel));
         
-        console.log(travel, 'res-->'); // Log the travel data to see what it contains
-        
         const dataUser = {
           email: inputValues.email,
           password: inputValues.password,
@@ -182,7 +181,7 @@ const LoginPage = () => {
         setLoginLoading(false);
       } catch (error) {
         setLoginLoading(false);
-        console.log(error); // Handle errors appropriately
+        console.error(error); // Handle errors appropriately
       }
     }
     
@@ -324,6 +323,9 @@ const LoginPage = () => {
                 </Button>
               </>
             }
+        <p>
+            Already have an account? <CustomLink to="/login">Login here</CustomLink>
+          </p>
           </div>
         </GridItem>
       </Grid>

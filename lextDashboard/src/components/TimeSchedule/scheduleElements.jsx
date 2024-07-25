@@ -3,91 +3,73 @@ import styled from 'styled-components';
 export const CalendarWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  // max-width: 1000px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
+  align-items: center;
 `;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 `;
 
 export const Button = styled.button`
+  padding: 5px 10px;
   background-color: #5d87ff;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
+  font-size: 0.8rem;
 `;
 
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0; /* Remove gap between grid items */
-  height: calc(100% - 50px); /* Adjusted for header */
+  grid-gap: 1px;
+  width: 100%;
+  background-color: #ddd;
 `;
 
 export const DateCell = styled.div`
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #ddd;
-  color: white;
-  position: relative;
-  overflow: hidden;
   background-color: #5d87ff;
-  // height: 60px; /* Adjusted height for day cells */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  // margin-bottom: -400px;
+  text-align: center;
+  color: white;
+  font-size: 0.8rem;
+  padding: 10px 0;
 `;
 
 export const Cell = styled.div`
-  padding: 5px;
-  background-color: ${(props) => (props.today ? '#d1ecf1' : '#f8f9fa')};
-  text-align: center;
-  border: 1px solid #ddd;
-  position: relative;
+  background-color: ${(props) => (props.isDay ? '#fff' : '#e8eaed')};
+  border: ${(props) => (props.today ? '2px solid #5d87ff' : '1px solid #ddd')};
+  padding: 10px;
+  min-height: 100px;
   cursor: pointer;
-  overflow: hidden;
-  height: auto; /* Adjusted height for date cells */
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  height: 120px;
   &:hover {
-    background-color: #e9ecef;
+    background-color: #f1f3f4;
   }
+  font-size: 0.8rem;
+`;
 
-  .event-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #ffc107;
-    color: #000;
-    padding: 4px 7px;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    border-top: 1px solid #ddd;
-    border-radius: 0 0 4px 4px;
-  }
+export const Event = styled.div`
+  background-color: ${(props) => props.color};
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-top: 2px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const Modal = styled.div`
@@ -95,8 +77,7 @@ export const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -110,6 +91,82 @@ export const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
+
+export const FilterWrapper = styled.div`
+  position: relative;
+`;
+
+export const FilterButton = styled(Button)`
+  margin-left: 10px;
+`;
+
+export const Dropdown = styled.div`
+  position: absolute;
+  margin-top: 10px;
+  padding: 10px;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: auto; /* Set width to 100% of parent */
+  display: flex;
+  flex-direction: column; /* Ensure items are stacked vertically */
+`;
+
+export const DropdownItem = styled.div`
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+  font-size: 0.8rem;
+`;
+
+export const DropdownItemWrapper = styled.div`
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 5px;
+padding: 10px;
+`
+
+
+export const DropdownHeader = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+`;
+
+export const  PrefYearIcon = styled.img`
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+
+`
+
+export const  NextYearIcon = styled.img`
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+`
+export const LeftButtonWrapper = styled.div`
+  display: flex;
+`
+
+export const TodayButton = styled.div`
+margin-left: 10px;
+margin-right: 10px;
+padding: 5px 10px;
+color: #5d87ff;
+border: none;
+border-radius: 3px;
+cursor: pointer;
+font-size: 0.8rem;
+border: 1px solid #5d87ff;
+`

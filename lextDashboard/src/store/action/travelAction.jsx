@@ -1,21 +1,29 @@
 import { showToast } from './toastAction';
 import { GET_TRAVEL_BY_ID } from './index';
 import agent from '../../utils/agent';
+import { linierProgresBar } from '../../store/action/globalAction';
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getTravelById = (id) => async (dispatch) => {
   try {
-  
+    dispatch(linierProgresBar(true)); // Start progress bar
+
+    await delay(3000); // Wait for 3 seconds
+
     const response = await agent.get(`/travel/${id}`);
 
     dispatch({
       type: GET_TRAVEL_BY_ID,
       payload: response.data,
     });
+    dispatch(linierProgresBar(false)); // Start progress bar
 
-    dispatch(showToast('success', 'Berhasil mendapatkan data clinic'));
+    dispatch(showToast('success', 'Berhasil mendapatkan data Travel'));
 
   } catch (error) {
     console.log(error, 'error');
+    dispatch(showToast('error', 'Gagal mendapatkan data Travel'));
   }
 };
 
@@ -27,10 +35,10 @@ export const updateTravel = (id, travelData) => async (dispatch) => {
       type: GET_TRAVEL_BY_ID,
       payload: response.data,
     });
-    dispatch(showToast('success', 'Berhasil mengupdate data clinic'));
+    dispatch(showToast('success', 'Berhasil mengupdate data travel'));
   } catch (error) {
-    console.error('Error updating clinic:', error);
-    dispatch(showToast('error', 'Gagal mengupdate data clinic'));
+    console.error('Error updating travel:', error);
+    dispatch(showToast('error', 'Gagal mengupdate data travel'));
   }
 };
 

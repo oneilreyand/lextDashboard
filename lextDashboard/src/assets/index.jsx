@@ -24,6 +24,9 @@ import registrasiJamaahSvg from './registrasiJamaahSvg.svg';
 import cabangSvg from './cabangSvg.svg';
 import agenSvg from './agenSvg.svg';
 import arrowUp from './arrowUpSvg.svg';
+import chevronLeftBlack from './chevron-left-Svg-black.svg';
+import chevronRightBlack from './chevron-right-Svg-black.svg';
+
 
 
 
@@ -56,4 +59,6 @@ export {
     cabangSvg,
     agenSvg,
     arrowUp,
+    chevronLeftBlack,
+    chevronRightBlack,
 };

@@ -105,11 +105,10 @@ const Setting = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const travel = useSelector((state) => state.travel.dataTravel);
-  const [submenuTitle, setSubMenuTitle] = useState('Profile travel')
+  const [submenuTitle, setSubMenuTitle] = useState('Profile Travel')
   const [menuTitle, setMenuTitle] = useState({mainMenu: 'Travel'})
   const [isEditProfileTravel, setIsEditProfileTravel] = useState(true);
   const [loading, setLoading] = useState(false);
-  console.log(user, 'data travel');
 
   const [dataProfileTravel, setDataProfileTravel] = useState({
     name: '',
@@ -141,8 +140,7 @@ const Setting = () => {
   const handleChangeMenuSetting = (s, m) => {
     setSubMenuTitle(s)
     setMenuTitle(m)
-    if(s === 'Profile Clinic') {
-      console.log(user, 'data user')
+    if(s === 'Profile Travel') {
       dispatch(getTravelById(user.travelId))
     }
   }
@@ -222,7 +220,7 @@ const Setting = () => {
           </>
         );
   
-      case 'Profile Clinic':
+      case 'Profile Travel':
         return (
           <>
             <FormContainer>
@@ -332,14 +330,13 @@ const Setting = () => {
 
   const descContent = (menu) => {
     switch (menu) {
-      case 'Profile Clinic':
+      case 'Profile Travel':
         return (
           <GridItem >
           <DescTitle>
-            {menu}
+            {/* {menu} */}
           </DescTitle>
           <Desc>
-          {'Fitur "Profile Clinic" dalam menu setting memungkinkan pengguna untuk melihat dan mengubah informasi terkait klinik. Fitur ini memberikan akses mudah dan terstruktur untuk mengelola data penting mengenai klinik.'}
           </Desc>
         </GridItem>
         )
@@ -386,7 +383,6 @@ const Setting = () => {
 
   const hasErrors = () => {
     const dataProfileTravelErrors = {}
-    console.log(dataProfileTravelErrors , 'data errors');
 
     Object.keys(dataProfileTravel).forEach(key => {
       if (dataProfileTravel[key].trim() === '') {
@@ -395,8 +391,6 @@ const Setting = () => {
         dataProfileTravelErrors[key] = false; // Set error menjadi false jika properti tidak kosong
       }
     });
-    console.log(dataProfileTravelErrors , 'data errors');
-
     setDataProfileTravelErrors(dataProfileTravelErrors)
     return Object.values(dataProfileTravelErrors).some(error => error === true);
   }
@@ -413,7 +407,7 @@ const Setting = () => {
         setIsEditProfileTravel(true);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         setLoading(false);
       }
     } else {

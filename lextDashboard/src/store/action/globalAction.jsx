@@ -1,6 +1,16 @@
-import {SCREEN_SIZE} from './index';
+import {
+    LINIER_PROGRES_BAR,
+    SCREEN_SIZE
+} from './index';
 
 export const ss = (payload) => ({
     type: SCREEN_SIZE,
     payload
 });
+
+export const linierProgresBar = (payload) => {
+    return {
+      type: LINIER_PROGRES_BAR,
+      payload,
+    };
+  };

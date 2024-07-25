@@ -1,5 +1,6 @@
 // GLOBAL ACTION
 export const SCREEN_SIZE = 'SCREEN_SIZE';
+export const  LINIER_PROGRES_BAR = 'LINIER_PROGRES_BAR';
 
 // AUTH
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';

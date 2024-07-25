@@ -33,7 +33,6 @@ function authReducer(state = initialState, action) {
         error: action.payload
       };
     case 'LOGOUT':
-      console.log('reducer login LOGOUT');
       return {
         ...state,
         isAuthenticated: false,

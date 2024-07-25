@@ -1,38 +1,60 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
 import {
   CalendarWrapper,
   Header,
   Button,
+  FilterWrapper,
+  FilterButton,
+  Dropdown,
+  DropdownHeader,
+  DropdownItem,
   Grid,
-  Cell,
-  Modal,
-  ModalOverlay,
   DateCell,
+  Cell,
+  Event,
+  DropdownItemWrapper,
+  NextYearIcon,
+  PrefYearIcon,
+  LeftButtonWrapper,
+  TodayButton,
 } from './scheduleElements';
 
-// Example Event Data
+import SlideModal from '../SlideModal'
+
+import {
+  chevronRightBlack,
+  chevronLeftBlack,
+} from '../../assets'
+
 const eventsData = [
-  { date: '2024-07-01', title: 'Depart to Umrah - Group A', color: '#ff9999' },
-  { date: '2024-07-01', title: 'Umrah in Makkah - Group B', color: '#99ff99' },
-  { date: '2024-07-02', title: 'Day 2 Activity - Group A', color: '#ffcc99' },
-  { date: '2024-07-03', title: 'Day 3 Activity - Group A', color: '#99ccff' },
-  { date: '2024-07-04', title: 'Day 4 Activity - Group B', color: '#ffccff' },
-  { date: '2024-07-05', title: 'Day 5 Activity - Group B', color: '#c2c2f0' },
-  { date: '2024-07-06', title: 'Day 6 Activity - Group A', color: '#ffb3e6' },
-  { date: '2024-07-07', title: 'Day 7 Activity - Group B', color: '#e6ffb3' },
-  // Add more events as needed
+  { date: '2024-07-24T00:00:00Z', title: 'Event 1 sdfsdfsd sdfsfsd' },
+  { date: '2024-07-24T00:00:00Z', title: 'Event 2' },
+  { date: '2024-07-25T00:00:00Z', title: 'Event 3' },
+  { date: '2024-07-25T00:00:00Z', title: 'Event 2' },
+  { date: '2024-07-25T00:00:00Z', title: 'Event 1' },
+  { date: '2024-07-5T00:00:00Z', title: 'Event 2' },
+  { date: '2024-07-4T00:00:00Z', title: 'Event 1' },
+  { date: '2024-07-27T00:00:00Z', title: 'Event 2' },
+  { date: '2024-07-27T00:00:00Z', title: 'Event 1' },
+  { date: '2024-07-27T00:00:00Z', title: 'Event 2' },
+  { date: '2024-07-27T00:00:00Z', title: 'Event 2' },
+  { date: '2024-07-27T00:00:00Z', title: 'Event 1' },
+  { date: '2024-07-27T00:00:00Z', title: 'Event 2' },
+  // Add more event objects here
 ];
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalDate, setModalDate] = useState(null);
-  const [eventInfo, setEventInfo] = useState('');
+  const [eventInfo, setEventInfo] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // Convert event data into a format suitable for rendering
   const events = eventsData.reduce((acc, event) => {
     const date = new Date(event.date).toDateString();
     if (!acc[date]) acc[date] = [];
-    acc[date].push({ title: event.title, color: event.color });
+    acc[date].push(event);
     return acc;
   }, {});
 
@@ -41,17 +63,14 @@ const Calendar = () => {
     const end = new Date(month.getFullYear(), month.getMonth() + 1, 0);
     const days = [];
 
-    // Adding previous month's days
     for (let i = start.getDay(); i > 0; i--) {
       days.push(new Date(start.getFullYear(), start.getMonth(), start.getDate() - i));
     }
 
-    // Adding current month's days
     for (let i = 1; i <= end.getDate(); i++) {
       days.push(new Date(month.getFullYear(), month.getMonth(), i));
     }
 
-    // Adding next month's days
     for (let i = 1; days.length % 7 !== 0; i++) {
       days.push(new Date(end.getFullYear(), end.getMonth(), end.getDate() + i));
     }
@@ -76,26 +95,76 @@ const Calendar = () => {
     setModalDate(null);
   };
 
-  const handleInputChange = (e) => {
-    setEventInfo(e.target.value);
-  };
-
-  const handleSave = () => {
-    if (modalDate) {
-      // Update event information (e.g., in the state or send to an API)
-      setEventInfo(eventInfo);
-      handleModalClose();
-    }
-  };
-
   const daysInMonth = generateCalendar(currentMonth);
   const today = new Date().toDateString();
+
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleMonthSelect = (month, year) => {
+    setCurrentMonth(new Date(year, month));
+    setShowDropdown(false);
+  };
+
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const setPrefYear = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear() - 1, currentMonth.getMonth()));
+  };
+
+  const setNextYear = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear() + 1, currentMonth.getMonth()));
+  };
+
+  const handleTodayClick = () => {
+    setCurrentMonth(new Date());
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <CalendarWrapper>
       <Header>
-        <Button onClick={handlePrevMonth}>Previous</Button>
-        <h2>{currentMonth.toLocaleString('default', { month: 'long' })} {currentMonth.getFullYear()}</h2>
+        <LeftButtonWrapper>
+          <Button onClick={handlePrevMonth}>Previous</Button>
+          <FilterButton onClick={handleDropdownToggle}>Filter</FilterButton>
+          <FilterWrapper ref={dropdownRef}>
+          <TodayButton onClick={handleTodayClick}>Today</TodayButton>
+            {showDropdown && (
+              <Dropdown>
+                <DropdownHeader>
+                  <PrefYearIcon src={chevronLeftBlack} onClick={setPrefYear} />
+                  {currentMonth.getFullYear()}
+                  <NextYearIcon src={chevronRightBlack} onClick={setNextYear} />
+                </DropdownHeader>
+                <DropdownItemWrapper>
+                  {months.map((month, index) => (
+                    <DropdownItem key={month} onClick={() => handleMonthSelect(index, currentMonth.getFullYear())}>
+                      {month}
+                    </DropdownItem>
+                  ))}
+                </DropdownItemWrapper>
+              </Dropdown>
+            )}
+          </FilterWrapper>
+        </LeftButtonWrapper>
+        <h3>
+          {currentMonth.toLocaleString('default', { month: 'long' })} {currentMonth.getFullYear()}
+        </h3>
         <Button onClick={handleNextMonth}>Next</Button>
       </Header>
       <Grid>
@@ -109,37 +178,37 @@ const Calendar = () => {
           return (
             <Cell
               key={day}
-              today={isToday}
               isDay={isCurrentMonth}
+              today={isToday}
               onClick={() => isCurrentMonth && handleDateClick(day)}
             >
               {day.getDate()}
-              {events[dateString] && events[dateString].map((event, index) => (
-                <div
-                  key={index}
-                  className="event-info"
-                  // style={{ backgroundColor: event.color }}
-                >
-                  {event.title}
-                </div>
+              {events[dateString] && events[dateString].slice(0, 3).map((event, index) => (
+                <Event key={index} color={index === 0 ? '#5d87ff' : index === 1 ? '#d93025' : '#fbbc05'}>
+                  {event.title.length > 16 ? event.title.slice(0, 12) + '...' : event.title}
+                </Event>
               ))}
+              {events[dateString] && events[dateString].length > 3 && (
+                <div style={{ fontSize: '12px', color: '#5d87ff' }}>+{events[dateString].length - 3} more</div>
+              )}
             </Cell>
           );
         })}
       </Grid>
-
-      {modalDate && (
-        <>
-          <ModalOverlay onClick={handleModalClose} />
-          <Modal>
-            <h3>{modalDate.toDateString()}</h3>
-            <textarea value={eventInfo.map(e => e.title).join('\n')} onChange={handleInputChange} rows="4" cols="30" />
-            <br />
-            <Button onClick={handleSave}>Save</Button>
-            <Button onClick={handleModalClose}>Close</Button>
-          </Modal>
-        </>
-      )}
+      <SlideModal
+        isOpen={modalDate}
+        onClose={handleModalClose}
+        from="right"
+      >
+        <h2>Slide Modal</h2>
+        {eventInfo.map((event, index) => (
+          <div key={index}>
+            <Event color={index === 0 ? '#5d87ff' : index === 1 ? '#d93025' : '#fbbc05'}>
+              {event.title}
+            </Event>
+          </div>
+        ))}
+      </SlideModal>
     </CalendarWrapper>
   );
 };
