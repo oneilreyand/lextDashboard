@@ -6,7 +6,8 @@ import { logout } from '../../store/action/authAction';
 
 // Create an Axios instance with default configuration
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:4010',
+  // baseURL: 'http://localhost:4010',
+  baseURL: 'https://lext-dashboard-server-oneilreyands-projects.vercel.app',
   headers: {
     'Content-Type': 'application/json'
   }
