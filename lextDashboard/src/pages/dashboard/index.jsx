@@ -1,18 +1,18 @@
 import {
   ChartWrapper,
   CardWrapper,
-} from './dashboarElements';
+} from './dashboarElements.jsx';
 
 import { Container } from '../../utils/GlobalStyle/lextaCore.jsx'
 
 import {
   Grid,
   GridItem,
-} from '../../utils/GlobalStyle/lextaCore'
+} from '../../utils/GlobalStyle/lextaCore.jsx'
 
-import LineChart from '../../components/LineChart.js';
+import LineChart from '../../components/LineChart.js/index.jsx';
 import BarChart from '../../components/BarChart/index.jsx';
-import Card from '../../components/Card';
+import Card from '../../components/Card/index.jsx';
 
 function Dashboard() {
   const cardContent = [

@@ -1,6 +1,6 @@
-import {showToast} from './toastAction';
-import agent from '../../utils/agent';
-import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT } from './index';
+import {addToast} from './toastAction.jsx';
+import agent from '../../utils/agent/index.jsx';
+import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT } from './index.jsx';
 
 export const login = (data) => async (dispatch) => {
   try {
@@ -16,7 +16,7 @@ export const login = (data) => async (dispatch) => {
     });
   } catch (error) {
     if(error.response.status === 400) {
-      dispatch(showToast('error', 'Email/Password yang anda input salah'));
+      dispatch(addToast('error', 'Email/Password yang anda input salah'));
     }
     dispatch({
       type: LOGIN_FAILURE,

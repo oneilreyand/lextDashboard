@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from 'react-redux'
-import {showToast} from '../../store/action/toastAction';
+import {addToast} from '../../store/action/toastAction.jsx';
 import { useState } from 'react';
 import {
   SettingsTitle,
@@ -14,15 +14,15 @@ import {
   ContentContainer,
   DescTitle,
   Desc,
-} from './settingElements'
-import { Container, Grid, GridItem } from '../../utils/GlobalStyle/lextaCore';
-import DynamicInput from '../../components/DynamicInput';
-import Button from '../../components/Button';
-import Spiner from '../../components/Spiner'
-import { getTravelById, updateTravel } from '../../store/action/travelAction';
+} from './settingElements.jsx'
+import { Container, Grid, GridItem } from '../../utils/GlobalStyle/lextaCore.jsx';
+import DynamicInput from '../../components/DynamicInput/index.jsx';
+import Button from '../../components/Button/index.jsx';
+import Spiner from '../../components/Spiner/index.jsx'
+import { getTravelById, updateTravel } from '../../store/action/travelAction.jsx';
 import { useEffect } from 'react';
-import ImageUploader from '../../components/imageUploader/index'
-import MenuItem from '../../components/MenuItem';
+import ImageUploader from '../../components/ImageUploader/index.jsx'
+import MenuItem from '../../components/MenuItem/index.jsx';
 
 
 
@@ -49,7 +49,7 @@ const settingMenu = [
   },
 ]
 
-const propinsi = [
+const provinsi = [
   {
     no: 1,
     name: 'Riau',
@@ -114,12 +114,11 @@ const Setting = () => {
     name: '',
     phoneNumber: '',
     address: '',
-    propinsi: '',
+    provinsi: '',
     kota: '',
     kelurahan: '',
     logo: '',
   });
-  
   const [dataProfileTravelerrors, setDataProfileTravelErrors] = useState({});
 
   useEffect(() => {
@@ -129,7 +128,7 @@ const Setting = () => {
         name: travel.name || '',
         phoneNumber: travel.phoneNumber || '',
         address: travel.address || '',
-        propinsi: travel.propinsi || '',
+        provinsi: travel.provinsi || '',
         kota: travel.kota || '',
         kelurahan: travel.kelurahan || '',
         logo: travel.logo || '',
@@ -267,15 +266,15 @@ const Setting = () => {
                     disabled={isEditProfileTravel}
                   />
                  <DynamicInput 
-                    label="Propinsi"
-                    placeholder="Propinsi" 
-                    value={dataProfileTravel.propinsi} 
-                    name="propinsi"
+                    label="Provinsi"
+                    placeholder="provinsi" 
+                    value={dataProfileTravel.provinsi} 
+                    name="provinsi"
                     onChange={handleChangeClinicProfile} 
-                    error={dataProfileTravelerrors.propinsi && 'Propinsi tidak boleh kosong'}
+                    error={dataProfileTravelerrors.provinsi && 'provinsi tidak boleh kosong'}
                     disabled={isEditProfileTravel}
                   >
-                    {propinsi.map((e, i) => (
+                    {provinsi.map((e, i) => (
                     <MenuItem key={`${i}+1`}>
                       {e.name}
                     </MenuItem>
@@ -403,7 +402,7 @@ const Setting = () => {
     if (!errors) {
       try {
         dispatch(updateTravel(user.travelId, dataProfileTravel));
-        dispatch(showToast('success', 'Berhasi update data profile clinic'));
+        dispatch(addToast('success', 'Berhasi update data profile clinic'));
         setIsEditProfileTravel(true);
         setLoading(false);
       } catch (error) {
@@ -439,15 +438,13 @@ const Setting = () => {
                 <MainMenu>
                   {menu.mainMenu}
                 </MainMenu>
-
                 <SubMenuContainer>
                   {
-                menu.subMenu.map((subMenu, i) => (
+                    menu.subMenu.map((subMenu, i) => (
                       <SubMenu onClick={() => handleChangeMenuSetting(subMenu, menu)} key={i}>
                         {subMenu}
                       </SubMenu>
-                )
-                    )
+                    ))
                   }
                   </SubMenuContainer>
               </>

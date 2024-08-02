@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from'react-redux';
-import Button from '../../components/Button';
-import Modal from '../../components/Modal';
-import SignaturePad from '../../components/SignaturePad';
-import Pagination from '../../components/Pagenation';
-import SearchComponent from '../../components/SearchInput';
-import SlideModal from '../../components/SlideModal';
+import Button from '../../components/Button/index.jsx';
+import Modal from '../../components/Modal/index.jsx';
+import SignaturePad from '../../components/SignaturePad/index.jsx';
+import Pagination from '../../components/Pagenation/index.jsx';
+import SearchComponent from '../../components/SearchInput/index.jsx';
+import SlideModal from '../../components/SlideModal/index.jsx';
 // import DatePicker from '../../components/DatePicker';
 // import TimePicker from '../../components/TimePicker';
 import { 
@@ -14,7 +14,7 @@ import {
   GridItem,
   ButtonContainer,
   ScrollableTableContainer
-} from '../../utils/GlobalStyle/lextaCore';
+} from '../../utils/GlobalStyle/lextaCore.jsx';
 import {
   Table,
   TableHead,
@@ -22,16 +22,16 @@ import {
   TableRow,
   TableCell,
   TableHeaderCell,
-} from '../../components/Table';
-import LazyAvatar from '../../components/LazyAvatar';
-import { TruncateText } from '../../utils';
+} from '../../components/Table/index.jsx';
+import LazyAvatar from '../../components/LazyAvatar/index.jsx';
+import { TruncateText } from '../../utils/index.jsx';
 import {
   AvatarDetail,
   AvatarDetailWrapper,
   StatusField,
   PaymentMethodeField,
-} from './content1Elements';
-import { getAllpatientByDate } from '../../store/action/patientAction'
+} from './content1Elements.jsx';
+import { getAllpatientByDate } from '../../store/action/patientAction.jsx'
 
 const ContentSatu = () => {
   const dispatch = useDispatch();

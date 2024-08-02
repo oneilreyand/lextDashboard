@@ -25,11 +25,18 @@ const TooltipContent = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   left: ${({ placement }) =>
-    placement === 'right' ? '110%' : placement === 'left' ? '-110%' : '50%'};
+    placement === 'right'
+      ? '100%' : placement === 'left'
+      ? '-100%' : '50%'};
   top: ${({ placement }) =>
-    placement === 'bottom' ? '110%' : placement === 'top' ? '-110%' : '50%'};
+    placement === 'bottom'
+      ? '100%' : placement === 'top'
+      ? '-100%' : '0%'};
   transform: ${({ placement }) =>
-    placement === 'left' || placement === 'right' ? 'translateY(-50%)' : 'translateX(-50%)'};
+    placement === 'left'
+      ? 'translateX(-100%) translateY(-50%)' : placement === 'right'
+      ? 'translateX(0%) translateY(-50%)' : placement === 'top'
+      ? 'translateX(-50%) translateY(-100%)' : 'translateX(-50%) translateY(0%)'};
 `;
 
 const Tooltip = ({ content, children, placement }) => {

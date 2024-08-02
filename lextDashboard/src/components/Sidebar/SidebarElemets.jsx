@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
   height: 100vh;
-  padding-left: ${({ isCollapsed }) => (isCollapsed ? '16px' : '24px')};
-  padding-right: ${({ isCollapsed }) => (isCollapsed ? '16px' : '24px')};
-  padding-bottom: ${({ isCollapsed }) => (isCollapsed ? '16px' : '24px')};
+  padding-left: ${({ iscollapsed }) => (iscollapsed ? '16px' : '24px')};
+  padding-right: ${({ iscollapsed }) => (iscollapsed ? '16px' : '24px')};
+  padding-bottom: ${({ iscollapsed }) => (iscollapsed ? '16px' : '24px')};
   padding-top: 16px;
   background-color: rgb(255, 255, 255);
   color: rgba(0, 0, 0, 0.87);
@@ -12,7 +12,7 @@ export const SidebarContainer = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  flex: 0 0 ${({ isCollapsed }) => (isCollapsed ? '80px' : '270px')}; /* Lebar sidebar yang bisa berubah */
+  flex: 0 0 ${({ iscollapsed }) => (iscollapsed ? '80px' : '270px')}; /* Lebar sidebar yang bisa berubah */
   border-right: 1px solid rgba(0, 0, 0, 0.12);
   transition: width 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;

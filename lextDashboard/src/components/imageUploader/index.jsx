@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button';
+import Button from '../Button/index.jsx';
 import { useDropzone } from 'react-dropzone';
 import {
   Label,
@@ -9,7 +9,7 @@ import {
   Container,
   ImagePreview,
   ButtonsContainer,
-} from './imageUploaderElements'
+} from './imageUploaderElements.jsx'
 
 const ImageUploader = ({ initialImage, onSave }) => {
   const [image, setImage] = useState(initialImage);
@@ -23,6 +23,7 @@ const ImageUploader = ({ initialImage, onSave }) => {
   const onDrop = (acceptedFiles) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       const selectedFile = acceptedFiles[0];
+      // eslint-disable-next-line node/no-unsupported-features/node-builtins
       const objectUrl = URL.createObjectURL(selectedFile);
       setImage(objectUrl);
       setFile(selectedFile);
@@ -40,6 +41,7 @@ const ImageUploader = ({ initialImage, onSave }) => {
     if (selectedFile) {
       const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (validMimeTypes.includes(selectedFile.type)) {
+        // eslint-disable-next-line node/no-unsupported-features/node-builtins
         const objectUrl = URL.createObjectURL(selectedFile);
         setImage(objectUrl);
         setFile(selectedFile);

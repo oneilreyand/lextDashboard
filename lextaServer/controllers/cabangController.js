@@ -21,8 +21,14 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const cabang = await CabangService.getCabangById(req.params.id);
-    res.status(200).json(cabang);
+    res.status(200).send({
+      data: cabang.conditions,
+      status: 200,
+      message: 'successfuly get data cabang'
+    })
+    
   } catch (error) {
+    console.error('Error fetching cabang:', error);
     res.status(404).json({ message: error.message });
   }
 };

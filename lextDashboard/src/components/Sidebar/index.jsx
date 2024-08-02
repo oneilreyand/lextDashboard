@@ -17,19 +17,19 @@ import {
   ProfileMenuIcon,
   ProfileMenuContainer,
   ProfileMenuItem,
-} from './SidebarElemets';
-import LazyAvatar from '../LazyAvatar';
-import MenuItem from '../SidebarMenu';
-import { menu } from '../../data';
+} from './SidebarElemets.jsx';
+import LazyAvatar from '../LazyAvatar/index.jsx';
+import MenuItem from '../SidebarMenu/index.jsx';
+import { menu } from '../../data/index.js';
 import {
   sahabatUmrahLogo,
   sahabatUmrahLogoText,
   chevronRightSvg,
   chevronleftSvg,
-} from '../../assets';
-import { logout } from '../../store/action/authAction'
+} from '../../assets/index.jsx';
+import { logout } from '../../store/action/authAction.jsx'
 
-function Sidebar({ isCollapsed }) {
+function Sidebar({ iscollapsed }) {
   const dispatach = useDispatch();
   const profileMenuRef = useRef(null);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -76,14 +76,14 @@ function Sidebar({ isCollapsed }) {
   }, []);
 
   return (
-    <SidebarContainer isCollapsed={isCollapsed}>
+    <SidebarContainer iscollapsed={iscollapsed}>
       <LogoWraaping>
         <LogoSvg src={sahabatUmrahLogo} alt='logo-svg'/>
-        {!isCollapsed &&
+        {!iscollapsed &&
           <LogoSvgText src={sahabatUmrahLogoText} alt='logo-svg'/>
         }
       </LogoWraaping>
-      {isCollapsed ? '...' : 'Menu'}
+      {iscollapsed ? '...' : 'Menu'}
       <MenuWrapper>
         {menu.map((m, index) => (
             <MenuItem
@@ -92,12 +92,12 @@ function Sidebar({ isCollapsed }) {
               title={m.title}
               isActive={activeMenu === index}
               onClick={() => handleMenuClick(index)}
-              isCollapsed={isCollapsed}
+              iscollapsed={iscollapsed}
               path={m.path}
             />
         ))}
       </MenuWrapper>
-      {!isCollapsed &&
+      {!iscollapsed &&
         <>
           <AccountWrapper>
             <LazyAvatar 
@@ -132,7 +132,7 @@ function Sidebar({ isCollapsed }) {
 }
 
 Sidebar.propTypes = {
-  isCollapsed: PropTypes.bool.isRequired,
+  iscollapsed: PropTypes.bool.isRequired,
 };
 
 export default Sidebar;

@@ -40,7 +40,7 @@ export const ButtonContainer = styled.div`
   align-items: flex-end; /* Tombol ke bawah */
   flex-wrap: wrap;
   gap: 1rem; /* Tambahkan jarak antar tombol */
-  padding: 1rem; /* Tambahkan padding jika diperlukan */
+  padding: 0.6rem; /* Tambahkan padding jika diperlukan */
   width: 100%; /* Sesuaikan lebar kontainer tombol */
 `;
 

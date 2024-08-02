@@ -1,61 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
-
-const InputWrapper = styled.div`
-  margin-bottom: 1rem;
-  position: relative;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-  color: #aaa;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-`;
-
-const ErrorMessage = styled.span`
-  color: red;
-  font-size: 0.875rem;
-`;
-
-const InfoMessage = styled.span`
-  color: #666;
-  font-size: 0.875rem;
-`;
-
-const Dropdown = styled.div`
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: white;
-  max-height: 400px;
-  overflow-y: auto;
-  z-index: 1000;
-`;
-
-const ItemCount = styled.div`
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  color: #666;
-  background: #f0f0f0;
-  border-top: 1px solid #ccc;
-`;
+import {
+  InputWrapper,
+  Label,
+  Input,
+  ErrorMessage,
+  InfoMessage,
+  Dropdown,
+  ItemCount
+} from './dynamicInputElements.jsx';
 
 const DynamicInput = ({ label, placeholder, value, name, onChange, type, error, info, disabled, children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [inputWidth, setInputWidth] = useState(0);
   const wrapperRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -69,6 +26,9 @@ const DynamicInput = ({ label, placeholder, value, name, onChange, type, error, 
   };
 
   useEffect(() => {
+    if (wrapperRef.current) {
+      setInputWidth(wrapperRef.current.offsetWidth);
+    }
     document.addEventListener('mousedown', closeDropdown);
     return () => {
       document.removeEventListener('mousedown', closeDropdown);
@@ -76,6 +36,11 @@ const DynamicInput = ({ label, placeholder, value, name, onChange, type, error, 
   }, []);
 
   const itemCount = React.Children.count(children);
+
+  const handleItemClick = (callback) => {
+    callback();
+    setIsDropdownOpen(false); // Close the dropdown on item click
+  };
 
   return (
     <InputWrapper ref={wrapperRef}>
@@ -93,9 +58,11 @@ const DynamicInput = ({ label, placeholder, value, name, onChange, type, error, 
       {error && <ErrorMessage>{error}</ErrorMessage>}
       {info && !error && <InfoMessage>{info}</InfoMessage>}
       {isDropdownOpen && children && (
-        <Dropdown>
+        <Dropdown style={{ width: `${inputWidth}px` }}>
           <ItemCount>{itemCount} items</ItemCount>
-          {children}
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child, { onClick: () => handleItemClick(child.props.onClick) })
+          )}
         </Dropdown>
       )}
     </InputWrapper>
@@ -111,7 +78,7 @@ DynamicInput.propTypes = {
   type: PropTypes.string,
   error: PropTypes.string,
   info: PropTypes.string,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   children: PropTypes.node,
 };
 

@@ -4,7 +4,6 @@ const initialState = {
 }
 
 function reducer(state = initialState, {type, payload}) {
-    console.log(payload, 'payload');
     switch (type) {
         case 'SCREEN_SIZE':
             return {...state, screenSize: payload}

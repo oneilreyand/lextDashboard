@@ -1,31 +1,30 @@
-// reducer.js
-
+// toastReducer.js
+import { ADD_TOAST, REMOVE_TOAST, CLEAR_TOASTS } from '../action/index.jsx';
 
 const initialState = {
-    active: false,
-    status: '',
-    message: ''
+  toasts: [],
 };
 
 const toastReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'SHOW_TOAST':
-            return {
-                ...state,
-                active: true,
-                status: action.payload.status,
-                message: action.payload.message
-            };
-        case 'HIDE_TOAST':
-            return {
-                ...state,
-                active: false
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case ADD_TOAST:
+      return {
+        ...state,
+        toasts: [...state.toasts, action.payload],
+      };
+    case REMOVE_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.filter((toast) => toast.id !== action.payload),
+      };
+    case CLEAR_TOASTS:
+    return {
+      ...state,
+      toasts: [],
+    };
+    default:
+      return state;
+  }
 };
 
 export default toastReducer;
-
-

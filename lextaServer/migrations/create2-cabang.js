@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      propinsi: {
+      provinsi: {
         type: Sequelize.STRING,
         allowNull: false,
       },

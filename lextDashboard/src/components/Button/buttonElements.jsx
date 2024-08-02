@@ -24,7 +24,7 @@ const containedStyles = css`
   border: 1px solid #5d87ff;
 
   &:hover {
-    background-color: #476bb4;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
   }
 
   &:disabled:hover {

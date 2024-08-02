@@ -26,6 +26,11 @@ import agenSvg from './agenSvg.svg';
 import arrowUp from './arrowUpSvg.svg';
 import chevronLeftBlack from './chevron-left-Svg-black.svg';
 import chevronRightBlack from './chevron-right-Svg-black.svg';
+import cabangSvgWhite from './cabangSvgWhite.svg';
+import maximizeSvg from './maximizeSvg.svg';
+import minimizeSvg from './minimizeSvg.svg';
+import trashSvg from './trashSvg.svg';
+import chartSvg from './chartSvg.svg';
 
 
 
@@ -61,4 +66,9 @@ export {
     arrowUp,
     chevronLeftBlack,
     chevronRightBlack,
+    cabangSvgWhite,
+    maximizeSvg,
+    minimizeSvg,
+    trashSvg,
+    chartSvg,
 };

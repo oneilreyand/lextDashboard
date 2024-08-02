@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {ProgressIcon} from './spinerElements'
+import {ProgressIcon} from './spinerElements.jsx'
 
 
 const ProgressSpinner = ({ size, color }) => {

@@ -1,12 +1,21 @@
-// actions.js
+import {
+    ADD_TOAST,
+    REMOVE_TOAST,
+    CLEAR_TOASTS
+} from './index.jsx';
 
-import { SHOW_TOAST, HIDE_TOAST } from './index';
+let toastId = 0;
 
-export const showToast = (status, message) => ({
-    type: SHOW_TOAST,
-    payload: { status, message }
+export const addToast = (status, message) => ({
+  type: ADD_TOAST,
+  payload: { id: ++toastId, status, message },
 });
 
-export const hideToast = () => ({
-    type: HIDE_TOAST
+export const hideToast = (id) => ({
+  type: REMOVE_TOAST,
+  payload: id,
+})
+
+export const clearToasts = () => ({
+  type: CLEAR_TOASTS,
 });

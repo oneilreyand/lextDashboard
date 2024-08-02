@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { StyledButton, IconWrapper } from './buttonElements';
+import { StyledButton, IconWrapper } from './buttonElements.jsx';
 
 const Button = ({ variant, size, disabled, children, icon, iconPosition, button_isactive, onClick }) => (
   <StyledButton variant={variant} size={size} disabled={disabled} button_isactive={button_isactive} onClick={onClick}>
@@ -26,6 +26,7 @@ Button.defaultProps = {
   iconPosition: 'left',
   button_isactive: false,
   variant: 'contained',
+  onClick: () => {},
 };
 
 export default Button;

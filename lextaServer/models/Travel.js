@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    propinsi: {
+    provinsi: {
       type: DataTypes.STRING,
       allowNull: true,
     },

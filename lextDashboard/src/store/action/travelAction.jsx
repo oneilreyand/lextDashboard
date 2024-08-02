@@ -1,7 +1,7 @@
-import { showToast } from './toastAction';
-import { GET_TRAVEL_BY_ID } from './index';
-import agent from '../../utils/agent';
-import { linierProgresBar } from '../../store/action/globalAction';
+import { addToast } from './toastAction.jsx';
+import { GET_TRAVEL_BY_ID } from './index.jsx';
+import agent from '../../utils/agent/index.jsx';
+import { linierProgresBar } from '../../store/action/globalAction.jsx';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -19,11 +19,10 @@ export const getTravelById = (id) => async (dispatch) => {
     });
     dispatch(linierProgresBar(false)); // Start progress bar
 
-    dispatch(showToast('success', 'Berhasil mendapatkan data Travel'));
+    dispatch(addToast('success', 'Berhasil mendapatkan data Travel'));
 
   } catch (error) {
-    console.log(error, 'error');
-    dispatch(showToast('error', 'Gagal mendapatkan data Travel'));
+    dispatch(addToast('error', 'Gagal mendapatkan data Travel'));
   }
 };
 
@@ -35,10 +34,10 @@ export const updateTravel = (id, travelData) => async (dispatch) => {
       type: GET_TRAVEL_BY_ID,
       payload: response.data,
     });
-    dispatch(showToast('success', 'Berhasil mengupdate data travel'));
+    dispatch(addToast('success', 'Berhasil mengupdate data travel'));
   } catch (error) {
     console.error('Error updating travel:', error);
-    dispatch(showToast('error', 'Gagal mengupdate data travel'));
+    dispatch(addToast('error', 'Gagal mengupdate data travel'));
   }
 };
 
@@ -49,11 +48,11 @@ export const createTravel = (travelData) => async (dispatch) => {
       type: GET_TRAVEL_BY_ID,
       payload: response.data,
     });
-    dispatch(showToast('success', 'Berhasil membuat travel baru'));
+    dispatch(addToast('success', 'Berhasil membuat travel baru'));
     return response.data; // Return the response data
   } catch (error) {
     console.error('Error creating travel:', error);
-    dispatch(showToast('error', 'Gagal membuat travel baru'));
+    dispatch(addToast('error', 'Gagal membuat travel baru'));
     throw error; // Throw the error to be caught by the calling function
   }
 };

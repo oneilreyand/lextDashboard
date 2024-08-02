@@ -5,11 +5,11 @@ import {
     userSvg,
     walletSvg,
     dataSvg,
-    // aidBagSvg,
+    cabangSvgWhite,
     listSquareSvg,
     airPlaneSvg,
     alarmSvg,
-} from '../assets/index'; // Importing the SVG as a URL
+} from '../assets/index.jsx'; // Importing the SVG as a URL
 
 const menu = [
     {
@@ -54,12 +54,12 @@ const menu = [
         icon: walletSvg,
         path: '/kasir'
     },
-    // {
-    //     id: 7,
-    //     title: 'Bpjs',
-    //     icon: aidBagSvg,
-    //     path: '/bpjs'
-    // },
+    {
+        id: 7,
+        title: 'Cabang',
+        icon: cabangSvgWhite,
+        path: '/cabang'
+    },
     {
         id: 8,
         title: 'Laporan',

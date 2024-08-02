@@ -1,10 +1,10 @@
-import ScreenSize from './screenSize';
-import ErrorBoundry from '../pages/errorBoundry';
-import PrivateRoute from './privateRoute';
-import GlobalStyle from './GlobalStyle/GlobalStyle';
-import UseIdle from './useIdle';
-import TruncateText from './TruncateText';
-
+import ScreenSize from './screenSize/index.jsx';
+import ErrorBoundry from '../pages/errorBoundry/index.jsx';
+import PrivateRoute from './privateRoute/index.jsx';
+import GlobalStyle from './GlobalStyle/GlobalStyle.jsx';
+import UseIdle from './useIdle/index.jsx';
+import TruncateText from './TruncateText/index.jsx';
+import dateConverter from './dateConverter.jsx';
 
 export {
      ScreenSize,
@@ -13,4 +13,6 @@ export {
      GlobalStyle,
      UseIdle,
      TruncateText,
+     // eslint-disable-next-line react-refresh/only-export-components
+     dateConverter,
 }

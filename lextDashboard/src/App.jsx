@@ -1,26 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import useBreakpoint from './utils/screenSize/index';
-import {ss} from './store/action/globalAction';
-import Router from './router';
-import { GlobalStyle } from './utils';
-import Toast from './components/Toast'
+import {useDispatch} from 'react-redux';
+import useBreakpoint from './utils/screenSize/index.jsx';
+import { clearToasts } from './store/action/toastAction.jsx'
+import {ss} from './store/action/globalAction.jsx';
+import Router from './router/index.jsx';
+import { GlobalStyle } from './utils/index.jsx';
+import Toast from './components/Toast/index.jsx'
 
 function App() {
   const dispatch = useDispatch()
   const screenSize = useBreakpoint();
-  const { active, status, message } = useSelector((state) => state.toast);
 
   useEffect(() => {
     dispatch(ss(screenSize))
-  }, [dispatch, screenSize, active])
+  }, [dispatch, screenSize])
+
+  useEffect(() => {
+    dispatch(clearToasts());
+  })
 
   return (
     <>
-    {active &&
-      <Toast active={active} status={status} message={message} />
-    }
+      <Toast />
       <GlobalStyle/>
       <Router/>
     </>

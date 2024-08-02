@@ -5,25 +5,25 @@ import {
   Container,
   Grid,
   GridItem
-} from '../../utils/GlobalStyle/lextaCore';
-import DynamicInput from '../../components/DynamicInput';
-import Button from '../../components/Button';
-import Spiner from '../../components/Spiner';
-import CustomLink from '../../components/CustomLink';
+} from '../../utils/GlobalStyle/lextaCore.jsx';
+import DynamicInput from '../../components/DynamicInput/index.jsx';
+import Button from '../../components/Button/index.jsx';
+import Spiner from '../../components/Spiner/index.jsx';
+import CustomLink from '../../components/CustomLink/index.jsx';
 import {
   PasswordWrapper,
   IconButton,
   IconButtonWrapper,
   LogoIcon,
-} from './registerElements';
+} from './registerElements.jsx';
 import {
   eyesvg,
   eyeslashsvg,
   sahabatUmrahLogoWhite,
-} from '../../assets';
-import StepComponent from '../../components/StepComponent';
-import {createTravel} from '../../store/action/travelAction';
-import { createUser } from '../../store/action/userAction';
+} from '../../assets/index.jsx';
+import StepComponent from '../../components/StepComponent/index.jsx';
+import {createTravel} from '../../store/action/travelAction.jsx';
+import { createUser } from '../../store/action/userAction.jsx';
 
 const LoginPage = () => {
   const dispatch = useDispatch();

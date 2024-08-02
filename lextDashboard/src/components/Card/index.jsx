@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import currencyUtils from '../../utils/currencyUtils'
+import currencyUtils from '../../utils/currencyUtils/index.jsx';
 import {
     bankSvg,
     registrasiJamaahSvg,
     cabangSvg,
     agenSvg,
-} from '../../assets'
+} from '../../assets/index.jsx';
 
 import {
     Title,
@@ -17,16 +17,16 @@ import {
     MrdWrapper,
     MrdInfo,
     MrdIcon,
-} from './cardElements';
+} from './cardElements.jsx';
 
 import {
     arrowUp,
-} from '../../assets'
+} from '../../assets/index.jsx';
 
-function Card({ data }) {
-    let iconImage
+function Card({ data = {} }) {
+    let iconImage;
 
-    if(data.title === 'Total Revenue') {
+    if (data.title === 'Total Revenue') {
         iconImage = bankSvg;
     } else if (data.title === 'Total Pendaftaran') {
         iconImage = registrasiJamaahSvg;
@@ -35,33 +35,34 @@ function Card({ data }) {
     } else if (data.title === 'Total Agen') {
         iconImage = agenSvg;
     }
-  return (
-    <Container>
-        <IconWrraper>
-            <Icon src={iconImage}/>
-        </IconWrraper>
-        <Nominal>
-        
-            {data.title === 'Total Revenue' ?
-            currencyUtils.formatToRupiah(data.total)
-            : data. total
-            }
-        </Nominal>
-        <InfoWrapper>
-            <Title>
-                {data.title}
-            </Title>
-            <MrdWrapper>
-                <MrdInfo>{data.monthlyRevenueDifference}%</MrdInfo>
-                <MrdIcon src={arrowUp}/>
-            </MrdWrapper>
-        </InfoWrapper>
-    </Container>
-  )
+
+    return (
+        <Container>
+            <IconWrraper>
+                <Icon src={iconImage} />
+            </IconWrraper>
+            <Nominal>
+                {data.title === 'Total Revenue'
+                    ? currencyUtils.formatToRupiah(data.total)
+                    : data.total}
+            </Nominal>
+            <InfoWrapper>
+                <Title>{data.title}</Title>
+                <MrdWrapper>
+                    <MrdInfo>{data.monthlyRevenueDifference}%</MrdInfo>
+                    <MrdIcon src={arrowUp} />
+                </MrdWrapper>
+            </InfoWrapper>
+        </Container>
+    );
 }
 
 Card.propTypes = {
-    data: PropTypes.array.isRequired,
-  }
+    data: PropTypes.shape({
+        title: PropTypes.string,
+        total: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        monthlyRevenueDifference: PropTypes.number,
+    }).isRequired,
+};
 
-export default Card
+export default Card;

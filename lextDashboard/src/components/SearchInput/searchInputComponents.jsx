@@ -4,8 +4,15 @@ export const SearchContainer = styled.div`
   border: 1px solid #ccc;
   border-radius: 20px;
   display: flex;
-  `;
-  export const SearchInput = styled.input`
+  transition: border-color 0.3s, border-width 0.3s;
+
+  &:focus-within {
+    border-color: #5d87ff;
+    border-width: 1.3px;
+  }
+`;
+
+export const SearchInput = styled.input`
   font-size: 0.875rem;
   font-weight: 100;
   border: none;

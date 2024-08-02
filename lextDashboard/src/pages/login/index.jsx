@@ -1,25 +1,25 @@
 /* eslint-disable no-useless-escape */
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, Grid, GridItem } from '../../utils/GlobalStyle/lextaCore';
-import DynamicInput from '../../components/DynamicInput';
-import Button from '../../components/Button';
-import Spiner from '../../components/Spiner';
+import { Container, Grid, GridItem } from '../../utils/GlobalStyle/lextaCore.jsx';
+import DynamicInput from '../../components/DynamicInput/index.jsx';
+import Button from '../../components/Button/index.jsx';
+import Spiner from '../../components/Spiner/index.jsx';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../store/action/authAction';
+import { login } from '../../store/action/authAction.jsx';
 import {
   PasswordWrapper,
   IconButton,
   IconButtonWrapper,
   LogoIcon,
   FallingButton,
-} from './loginElements';
+} from './loginElements.jsx';
 import {
   eyesvg,
   eyeslashsvg,
   sahabatUmrahLogoWhite,
-} from '../../assets';
-import CustomLink from '../../components/CustomLink';
+} from '../../assets/index.jsx';
+import CustomLink from '../../components/CustomLink/index.jsx';
 
 const LoginPage = () => {
   const dispatch = useDispatch();

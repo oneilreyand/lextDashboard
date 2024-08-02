@@ -8,9 +8,9 @@ import {
     SpinerWrapper,
     SearchIconWrapper,
     SearchInpiutWrapper,
-} from './searchInputComponents';
-import {searchSvg} from '../../assets';
-import Spiner from '../../components/Spiner';
+} from './searchInputComponents.jsx';
+import {searchSvg} from '../../assets/index.jsx';
+import Spiner from '../../components/Spiner/index.jsx';
 
 
 const SearchComponent = ({ onSearch, isLoading }) => {

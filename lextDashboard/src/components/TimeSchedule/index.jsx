@@ -104,7 +104,7 @@ const Calendar = () => {
 
   const handleMonthSelect = (month, year) => {
     setCurrentMonth(new Date(year, month));
-    setShowDropdown(false);
+    // setShowDropdown(false);
   };
 
   const months = [
@@ -162,7 +162,7 @@ const Calendar = () => {
             )}
           </FilterWrapper>
         </LeftButtonWrapper>
-        <h3>
+        <h3 style={{ fontWeight: 300 }}>
           {currentMonth.toLocaleString('default', { month: 'long' })} {currentMonth.getFullYear()}
         </h3>
         <Button onClick={handleNextMonth}>Next</Button>

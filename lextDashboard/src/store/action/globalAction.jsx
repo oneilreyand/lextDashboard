@@ -1,7 +1,7 @@
 import {
     LINIER_PROGRES_BAR,
     SCREEN_SIZE
-} from './index';
+} from './index.jsx';
 
 export const ss = (payload) => ({
     type: SCREEN_SIZE,

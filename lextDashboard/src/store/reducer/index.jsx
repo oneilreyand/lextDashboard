@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
-import globalReducer from './globalReducer';
-import userReducer from './userReducer';
-import patinetReducer from './patientReducer';
-import authReducer from './authReducer';
-import snackbarReducer from './snacbarrReducer';
-import toastReducer from './toastReducer';
-import travelReducer from './travelReducer';
+import globalReducer from './globalReducer.jsx';
+import userReducer from './userReducer.jsx';
+import patinetReducer from './patientReducer.jsx';
+import authReducer from './authReducer.jsx';
+import snackbarReducer from './snacbarrReducer.jsx';
+import toastReducer from './toastReducer.jsx';
+import travelReducer from './travelReducer.jsx';
+import cabangReducer from './cabangReducer.jsx';
+import wilayahIndonesiaReducer from './wilayahIndonesiaReducer.jsx'
 
 const rootReducer = combineReducers({
   global: globalReducer, // Naming reducers can also help in distinguishing them
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
   snackbar: snackbarReducer,
   toast: toastReducer,
   travel: travelReducer,
+  cabang: cabangReducer,
+  wilayahIndonesia: wilayahIndonesiaReducer,
 });
 
 export default rootReducer;

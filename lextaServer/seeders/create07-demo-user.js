@@ -15,8 +15,8 @@ module.exports = {
         name: 'John Doe',
         avatar: 'https://example.com/avatar1.png',
         userInfo: JSON.stringify({ age:23 }),
-        travelId: '16743a59-af87-4d78-90a1-f3c3f81392bb', // Set the travelId if applicable
-        cabangId: '7132d70a-2c52-4451-a8dd-6b27469cbaea', // Set the cabangId if applicable
+        travelId: '1be2b21c-8a4a-48cd-a9e5-4ea58db246b8', // Set the travelId if applicable
+        cabangId: '30df04be-ecf3-4646-8284-247da1a2db59', // Set the cabangId if applicable
         token: null,
         refreshToken: null,
         isAgent: false,
@@ -31,8 +31,8 @@ module.exports = {
         name: 'Jane Smith',
         avatar: 'https://example.com/avatar2.png',
         userInfo: JSON.stringify({ age: 30 }),
-        travelId: '16743a59-af87-4d78-90a1-f3c3f81392bb', // Set the travelId if applicable
-        cabangId: '9879df42-44d7-400d-a47e-f31ad73ef048', // Set the cabangId if applicable
+        travelId: '61ae9701-0702-4d14-b7d8-d452a03d8bcb', // Set the travelId if applicable
+        cabangId: '8b5dc997-2cbd-4f4e-9fd5-b9b0db323067', // Set the cabangId if applicable
         token: null,
         refreshToken: null,
         isAgent: true,

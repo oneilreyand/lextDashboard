@@ -1,7 +1,8 @@
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
-import PrivateRoute from '../utils/privateRoute';
-import PublicRoute from '../utils/publickRoute'; // Perbaikan typo: "publicRoute"
-import IdleRoute from './idleRouter'; // Import IdleRoute
+import PrivateRoute from '../utils/privateRoute/index.jsx';
+import PublicRoute from '../utils/publickRoute/index.jsx';
+import IdleRoute from './idleRouter.jsx';
+import { Suspense, lazy } from 'react';
 import {
   Dashboard,
   Error404,
@@ -11,10 +12,12 @@ import {
   Patient,
   TravelSchedule,
   Register,
-} from '../pages';
-import Layout from './layout';
+} from '../pages/index.jsx';
+import Layout from './layout.jsx';
 import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallback from '../pages/errorBoundry';
+import ErrorFallback from '../pages/errorBoundry/index.jsx';
+
+const Cabang = lazy(() => import('../pages/Cabang/index.jsx'));
 
 const AppRouter = () => {
   return (
@@ -62,7 +65,7 @@ const AppRouter = () => {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/schedule"
               element={
                 <PrivateRoute>
@@ -72,10 +75,19 @@ const AppRouter = () => {
                 </PrivateRoute>
               }
             />
-            <Route 
-              path="*"
-              element={<Error404 />} 
+            <Route
+              path="/cabang"
+              element={
+                <PrivateRoute>
+                  <IdleRoute>
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <Cabang />
+                    </Suspense>
+                  </IdleRoute>
+                </PrivateRoute>
+              }
             />
+            <Route path="*" element={<Error404 />} />
           </Route>
           <Route
             path="/login"
@@ -89,7 +101,7 @@ const AppRouter = () => {
             path="/register"
             element={
               <PublicRoute>
-                <Register/>
+                <Register />
               </PublicRoute>
             }
           />
@@ -97,6 +109,6 @@ const AppRouter = () => {
       </ErrorBoundary>
     </Router>
   );
-}
+};
 
 export default AppRouter;

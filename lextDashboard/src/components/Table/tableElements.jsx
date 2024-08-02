@@ -24,7 +24,7 @@ export const StyledTableHead = styled.thead`
   export const StyledTableCell = styled.td`
   font-size: 0.875rem;
   font-weight: 300;
-  padding: 5px;
+  padding: 2xpx;
   border-bottom: 1px solid #ddd;
   white-space: nowrap
 `;

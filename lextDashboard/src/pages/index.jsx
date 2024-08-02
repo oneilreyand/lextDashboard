@@ -1,12 +1,13 @@
-import Dashboard from "./dashboard";
-import Error404 from './error404';
-import Setting from "./Settings";
-import ContentSatu from './content1';
-import Login from './login';
-import Patient from './patient';
-import PatientContent from './patientContent';
-import TravelSchedule from "./schedule";
-import Register from './Register';
+import Dashboard from "./dashboard/index.jsx";
+import Error404 from './error404/index.jsx';
+import Setting from "./Settings/index.jsx";
+import ContentSatu from './content1/index.jsx';
+import Login from './login/index.jsx';
+import Patient from './patient/index.jsx';
+import PatientContent from './patientContent/index.jsx';
+import TravelSchedule from "./schedule/index.jsx";
+import Register from './Register/index.jsx';
+import Cabang from './Cabang/index.jsx';
 
 export {
     Dashboard,
@@ -18,4 +19,5 @@ export {
     PatientContent,
     TravelSchedule,
     Register,
+    Cabang,
 };

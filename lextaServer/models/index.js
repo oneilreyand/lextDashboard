@@ -8,10 +8,16 @@ const env = process.env.NODE_ENV || 'production';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-// const sequelize = new Sequelize(config.database, config.username, config.password, config);
-const sequelize = new Sequelize(config.database, config.username, config.password, config, {
-  dialectModule: require('pg')
-});
+const sequelize = new Sequelize(config.database, config.username, config.password, config);
+
+// Log connection status
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection to the database has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 fs
   .readdirSync(__dirname)

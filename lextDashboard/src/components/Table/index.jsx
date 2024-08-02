@@ -7,7 +7,7 @@ import {
   StyledTableCell,
   StyledTableHeaderCell,
   Avatar
-} from './tableElements';
+} from './tableElements.jsx';
 
 // Table component
 const Table = ({ children }) => (

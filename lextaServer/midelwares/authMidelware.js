@@ -4,16 +4,18 @@ const { User } = require('../models');
 const authMiddleware = async (req, res, next) => {
   try {
     // Extract token from Authorization header
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const token = req.header('Authorization');
+    const cleanToken = token ? token.replace('Bearer ', '') : '';
+    
+    if (!cleanToken) {
       return res.status(401).json({ message: 'No token provided.' });
     }
 
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(cleanToken, process.env.JWT_SECRET);
     
     // Find user and check if token matches
-    const user = await User.findOne({ where: { id: decoded.id, token } });
+    const user = await User.findOne({ where: { id: decoded.id, token: cleanToken } });
     if (!user) {
       throw new Error();
     }

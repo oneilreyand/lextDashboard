@@ -7,7 +7,7 @@ const authMiddleware = require ('../midelwares/authMidelware');
 // CRUD operations for Cabang
 router.post('/', cabangController.create);
 router.get('/', cabangController.getAll);
-router.get('/:id', authMiddleware, cabangController.getById);
+router.get('/:id', cabangController.getById);
 router.put('/:id', cabangController.update);
 router.delete('/:id', cabangController.delete);
 
