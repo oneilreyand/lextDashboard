@@ -1,23 +1,26 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
-const authMiddleware = async (req, res, next) => {
+const verifyToken = async (token) => {
   try {
-    // Extract token from Authorization header
-    const token = req.header('Authorization');
     const cleanToken = token ? token.replace('Bearer ', '') : '';
-    
+
     if (!cleanToken) {
-      return res.status(401).json({ message: 'No token provided.' });
+      return { valid: false, message: 'No token provided.' };
     }
 
     // Verify token
     const decoded = jwt.verify(cleanToken, process.env.JWT_SECRET);
-    
+
     // Find user and check if token matches
-    const user = await User.findOne({ where: { id: decoded.id, token: cleanToken } });
+    const user = await User.findOne({ where: { id: decoded.id } });
     if (!user) {
-      throw new Error();
+      return { valid: false, message: 'User not found.' };
+    }
+
+    // Check for double login
+    if (user.token !== cleanToken) {
+      return { valid: false, message: 'This token is no longer valid. User has logged in from another device.' };
     }
 
     // Check if token is expired
@@ -27,16 +30,12 @@ const authMiddleware = async (req, res, next) => {
       const newToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       await user.update({ token: newToken });
 
-      // Respond with new token
-      res.setHeader('x-new-token', newToken);
+      return { valid: true, newToken, user };
     }
 
-    // Attach user to request
-    req.user = user;
-    next();
+    return { valid: true, user };
   } catch (error) {
-    res.status(401).json({ message: 'Please authenticate.' });
+    return { valid: false, message: 'Token is invalid or expired.' };
   }
 };
-
-module.exports = authMiddleware;
+module.exports = verifyToken;

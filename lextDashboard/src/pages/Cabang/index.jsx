@@ -377,7 +377,7 @@ const CabangComponent = () => {
     )
   }
 
-  // ngrubah data data kecamatan di form tambah cabang
+  // ngerubah data data kecamatan di form tambah cabang
   const handleChangeNewProvinsi = (e) => {
     setNewDataProfinsi(e);
     setIsDisabledKabupaten(false);
@@ -388,7 +388,7 @@ const CabangComponent = () => {
     })
   }
 
-  // ngrubah data data kabupaten di form tambah cabang
+  // ngerubah data data kabupaten di form tambah cabang
   const handleChangeNewKabupaten = (e) => {
     setNewDataKabupaten(e);
     setIsDisabledKecamatan(false);
@@ -398,7 +398,7 @@ const CabangComponent = () => {
     })
   }
 
-  // ngrubah data data kecamatan di form tambah cabang
+  // ngerubah data data kecamatan di form tambah cabang
   const handleChangeNewKecamatan = (e) => {
     setNewDataKecamatan(e)
   }
